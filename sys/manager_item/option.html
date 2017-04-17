@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>选项展示</title>
+</head>
+<body>
+<!--当前页面的css和js包含在manage_html里-->
+
+<div index="1" class='package-label-textarea'>
+    <!-- label -->
+    <div class='package-label'>
+        <div class="package-dv-label">
+            <label for='item-b-option'>A</label>
+        </div>
+        <div class="package-dv-a">
+            <a class="easyui-linkbutton" href="javascript:void(0)" onclick="" >重置</a>
+            <input type="checkbox" class="ensure" name="item['a'].check" value="true" checked="checked">
+        </div>
+    </div>
+    <!-- 选项框 -->
+    <div class='package-textarea'>
+        <textarea name="item['a'].title" class='item-textarea' id='item-a-option'>A选项</textarea>
+    </div>
+</div>
+
+<div index="2" class='package-label-textarea' >
+    <!-- label -->
+    <div class='package-label'>
+        <div class="package-dv-label">
+            <label for='item-b-option'>B</label>
+        </div>
+        <div class="package-dv-a">
+            <a class="easyui-linkbutton" href="javascript:void(0)" >重置</a>
+            <!--<input type="checkbox" class="ensure">-->
+            <input type="checkbox" class="ensure" name="item['b'].check" value="true">
+        </div>
+    </div>
+    <!-- 选项框 -->
+    <div class='package-textarea'>
+        <textarea name="item['b'].title" class='item-textarea' id='item-b-option'>B选项</textarea>
+    </div>
+</div>
+<div index="3" class='package-label-textarea'>
+    <!-- label -->
+    <div class='package-label'>
+        <div class="package-dv-label">
+            <label for='item-b-option'>C</label>
+        </div>
+        <div class="package-dv-a">
+            <a class="easyui-linkbutton" href="javascript:void(0)" onclick="">重置</a>
+            <!--<input type="checkbox" class="ensure">-->
+            <input type="checkbox" class="ensure" name="item['c'].check" value="true">
+        </div>
+    </div>
+    <!-- 选项框 -->
+    <div class='package-textarea'>
+        <textarea name="item['c'].title" class='item-textarea' id='item-c-option'>C选项</textarea>
+    </div>
+</div>
+<div index="4" class='package-label-textarea'>
+    <!-- label -->
+    <div class='package-label'>
+        <div class="package-dv-label">
+            <label for='item-b-option'>D</label>
+        </div>
+        <div class="package-dv-a">
+            <a class="easyui-linkbutton" href="javascript:void(0)" onclick="">重置</a>
+            <!--<input type="checkbox" class="ensure">-->
+            <input type="checkbox" class="ensure" name="item['d'].check" value="true">
+        </div>
+    </div>
+    <!-- 选项框 -->
+    <div class='package-textarea'>
+        <textarea name='item["d"].title' class='item-textarea' id='item-d-option'>D选项</textarea>
+    </div>
+</div>
+<div index="5" class='package-label-textarea'>
+    <!-- label -->
+    <div class='package-label'>
+        <div class="package-dv-label">
+            <label for='item-b-option'>E</label>
+        </div>
+        <div class="package-dv-a">
+            <a class="easyui-linkbutton" href="javascript:void(0)" >重置</a>
+            <!--<input type="checkbox" class="ensure" checked="checked">-->
+            <input type="checkbox" class="ensure" name="item['e'].check" value="true">
+        </div>
+    </div>
+    <!-- 选项框 -->
+    <div class='package-textarea'>
+        <textarea name="item['e'].title" class='item-textarea' id='item-e-option'>E选项</textarea>
+    </div>
+</div>
+<script type="text/javascript">
+//   $("#option-flag-res").bind('click',resetbtn);
+    var indexmsg = new saveindexmsg();//保存选项信息
+    indexmsg.save();
+    $(".package-dv-a .easyui-linkbutton").bind('click',resetbtn);
+</script>
+</body>
+</html>

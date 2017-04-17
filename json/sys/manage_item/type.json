@@ -1,0 +1,16 @@
+[
+  {
+    "key":"single",
+    "value":"单选题"
+  },
+  {
+    "key":"multiple",
+    "value":"多选题"
+  },{
+    "key":"",
+    "value":"不选择"
+  },{
+  "key":"writep",
+  "value":"图像填空题"
+}
+]

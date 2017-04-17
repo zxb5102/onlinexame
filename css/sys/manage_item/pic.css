@@ -1,0 +1,39 @@
+.drag-item{
+    list-style-type:none;
+    display:block;
+    padding:5px;
+    border:2px solid #ccc;
+    margin:2px;
+    width:300px;
+    background:#fafafa;
+    color:#444;
+    width: 1000px;
+}
+
+.drag-dv-a{
+    float: left;
+    width: 55px;
+    padding-top:20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.pic-ul{
+    margin:0px;
+    padding:0px;
+    overflow-x: hidden;
+}
+.pic-package-img{
+    height: 100px;
+}
+.indicator{
+    position:absolute;
+    font-size:9px;
+    width:10px;
+    height:10px;
+    display:none;
+    color:red;
+}
+.dia-pack-img{
+    height: 100px;
+}
+

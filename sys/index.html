@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link rel="stylesheet" type="text/css" href="../easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css">
+    <script type="text/javascript" src="../easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
+    <!--下面是这个页面自己的js和css文件-->
+    <script type="text/javascript" src="../js/sys/index.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/sys/index.css">
+
+</head>
+<body>
+<div class="easyui-layout" fit="true" >
+    <div data-options="region:'south',split:false" style="height:50px;"></div>
+    <!--这个是左边的菜单-->
+    <div data-options="region:'west',split:false" title="菜单" style="width: 100px;">
+        <ul class="menu-ul">
+            <li><a class="btn-menu easyui-linkbutton" url="manage_word.html" href="javascript:void(0)">试卷管理</a></li>
+            <li><a class="btn-menu easyui-linkbutton"  url="manage_student.html" href="javascript:void(0)">考生管理</a></li>
+            <li><a class="btn-menu easyui-linkbutton"  url="manager_item/manage_item.html" href="javascript:void(0)">题库管理</a></li>
+            <li><a class="btn-menu easyui-linkbutton"  url="manage_dept.html" href="javascript:void(0)">部门管理</a></li>
+        </ul>
+    </div>
+    <!--这个是布局中间-->
+    <div data-options="region:'center'">
+        <!--布局中间的面板-->
+        <div class="sys-tab easyui-tabs" fit="true" style="">
+            <div title="首页" style="padding:10px"></div>
+        </div>
+    </div>
+</div>·
+
+
+
+
+</body>
+</html>

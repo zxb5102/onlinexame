@@ -1,0 +1,14 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+ul{
+    list-style: none;
+
+}
+.menu-ul{
+    padding-left: 20px;
+}
+.menu-ul li{
+    margin-top: 10px;
+}

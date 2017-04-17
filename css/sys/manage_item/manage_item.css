@@ -1,0 +1,15 @@
+/*
+
+*/
+
+
+.item-msg-width{
+    width: 200px;
+}
+/*这个还被option.html引用*/
+.item-textarea{
+    height:100px;
+    width:250px;
+    resize:none;
+    background-color:#cccccc;
+}

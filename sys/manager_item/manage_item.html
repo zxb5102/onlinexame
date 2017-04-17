@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>题库管理</title>
+    <link rel="stylesheet" type="text/css" href="../../easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../../easyui/themes/icon.css">
+    <script type="text/javascript" src="../../easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="../../easyui/jquery.easyui.min.js"></script>
+    <!--为数据表格添加显示详细页的js-->
+    <script type="text/javascript" src="../../easyui/plugins/datagrid-detailview.js"></script>
+    <!--下面是当前页面真身的js和css-->
+    <link rel="stylesheet" type="text/css" href="../../css/sys/manage_item/manage_item.css">
+    <script type="text/javascript" src="../../js/sys/manage_item/manage_item.js"></script>
+    <script type="text/javascript" src="../../js/sys/manage_item/manage_item_crud.js"></script>
+    <script type="text/javascript" src="../../js/sys/manage_item/dialog_accordion_select.js"></script>
+    <script type="text/javascript" src="../../js/sys/manage_item/dialog_title_btu.js"></script>
+    <script type="text/javascript" src="../../js/sys/manage_item/dialog_option_btu.js"></script>
+    <script type="text/javascript" src="../../js/sys/manage_item/dialog_save_canel.js"></script>
+    <script type="text/javascript" src="../../js/sys/manage_item/manage_item_validate.js"></script>
+    <!--选项展示-->
+    <script type="text/javascript" src="../../js/sys/manage_item/option.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../css/sys/manage_item/option.css">
+    <!--图片展示-->
+    <link rel="stylesheet" type="text/css" href="../../css/sys/manage_item/pic.css">
+    <script type="text/javascript" src="../../js/sys/manage_item/dialog_pic_dl_canel.js"></script>
+
+</head>
+<body>
+
+<table id="dg" title="题目库" class="easyui-datagrid" style="width:90%;height:500px"
+       url="../../json/sys/manage_item/grid.json"
+       toolbar="#toolbar" pagination="true"
+       rownumbers="true" fitColumns="true"
+       singleSelect="true" autoRowHeight="true"
+       loadMsg="玩命加载中...."remoteSort="false"
+       >
+    <thead>
+    <tr>
+        <th field="id" width="5">编号</th>
+        <th field="source" width="8">来源</th>
+        <th field="type" width="5">题型</th>
+        <th field="text" width="50" formatter='format'>题目</th>
+        <th field="answer" width="10">答案</th>
+        <th field="changedate" width="10" sorter="sortdate"  sortable="true">修改时间</th>
+    </tr>
+    </thead>
+</table>
+
+<div id="toolbar">
+    <a href="javascript:void(0);" class="easyui-linkbutton" iconCls="icon-add" onclick="newTest()">添加题目</a>
+    <a href="javascript:void(0);" class="easyui-linkbutton" iconCls="icon-edit" onclick="editTest()">编辑题目</a>
+    <a href="javascript:void(0);" class="easyui-linkbutton" iconCls="icon-remove" onclick="removeTest()">删除题目</a>
+    <div style="padding:3px">
+
+        <input id="id" class="easyui-numberspinner" value="" data-options="label:'编号:',min:1" style="width:200px">
+        <input label="修改时间:" id="start_date" class="easyui-datebox"
+               style="width:200px;line-height:26px;border:1px solid #ccc" formatter="overridedate">
+
+        <input id="end_date" class="easyui-datebox" style="width:120px;line-height:26px;border:1px solid #ccc" formatter="overridedate">
+
+        <input name='source' id="source" label='来源:' class='easyui-combobox item-msg-width' data-options="
+						valueField: 'key',
+				        textField: 'value',
+				        url: '../../json/sys/manage_item/category.json',
+				        onSelect:function(rec){
+                            $('#source').val(rec.key);
+				        }
+				"/>
+
+        <input name='type' id="type" label='题型:' class='easyui-combobox item-msg-width' data-options="
+						valueField: 'key',
+				        textField: 'value',
+				        url: '../../json/sys/manage_item/type.json',
+                       onSelect:function(rec){
+                            $('#type').val(rec.key);
+				        }
+				"/>
+
+
+        <input class="easyui-textbox" id="test_key" style="width:200px" data-options="label:'试题关键字:',required:false">
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'"
+           onclick="doSearch()">Search</a>
+    </div>
+    <!--style="width:80px"-->
+</div>
+
+
+<div id="dlg" class="easyui-dialog" style="width:720px;height:470px;padding:10px 20px"
+     closed="true" buttons="#dlg-buttons" closable="false">
+
+    <!-- 编辑信息的对话框enctype="multipart/form-data" -->
+    <form id="item-dialog" method="post" novalidate >
+
+        <!---->
+        <input name="id" type="hidden" id="dia_item_id">
+        <div class='item-msg-dv'>
+            <input name='source' label='来源' class='easyui-combobox item-msg-width' data-options="
+						valueField: 'key',
+				        textField: 'value',
+				        url: '../../json/sys/manage_item/type.json'
+				"/>
+        </div>
+
+        <div class='item-msg-dv'>
+            <input name="type" label='题型' class="easyui-combobox item-msg-width" data-options="
+				        valueField: 'key',
+				        textField: 'value',
+				        url: '../../json/sys/manage_item/category.json'">
+        </div>
+
+        <div class='item-msg-dv item-msg-file'>
+            <input name='file' style="width:300px" label='关联图片' class='easyui-filebox item-msg-width' data-options="
+					buttonText:'添加图片',
+					multiple:'true',
+					buttonAlign:'right',
+					accept: 'image/*'
+				">
+        </div>
+
+        <div id="dialog-according" class="easyui-accordion" style="width:650px;height:300px;" data-options="">
+            <!--selected:true-->
+            <div title="题目" style="padding: 10px;" data-options="iconCls:'icon-ok'">
+                <!--这里放着回显的题目-->
+                <div class='package-label-textarea'>
+                    <!-- 选项框 -->
+                        <textarea class='item-textarea' id='item-a-option' name="text" style="width:500px;height: 150px;"></textarea>
+                        <div>
+                            <input id="title-clr" type="button" value="清空" name="">
+                            <input id="title-undo" type="button" value="还原" name="">
+                        </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+<div id="dlg-buttons">
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveTest()">保存</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="cancelText()">取消</a>
+</div>
+
+<!-- 提供搜索信息错误时候的提示框 -->
+<div id="vmsg" class="easyui-dialog" title="输入条件出错" style="width:400px;height:200px;padding:10px"
+     data-options="
+             	closed: true,
+                iconCls: 'icon-search',
+                buttons: [{
+                    text:'Ok',
+                    iconCls:'icon-ok',
+                    handler:function(){
+                        $('#vmsg').dialog('close');
+                    }
+                }]
+            ">
+    信息验证框
+</div>
+
+</body>
+</html>
