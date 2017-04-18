@@ -7,10 +7,34 @@ function resetbtn() {
     var pare = $(this).parents("div[index]")[0];
     var index = $(pare).attr('index');//获取序列号
     // console.log();
-    var str = indexmsg.msg[parseInt(index)-1];//获取保存的字符串
-    var package = $(pare).children('.package-textarea')[0];
-    var area = $(package).children('.item-textarea')[0];
-    var str = $(area).val(str);//设置字符串
+    if( index != -1 ){
+        var str = indexmsg.msg[parseInt(index)-1];//获取保存的字符串
+        var package = $(pare).children('.package-textarea')[0];
+        var area = $(package).children('.item-textarea')[0];
+        var str = $(area).val(str);//设置字符串
+    }else{
+        //进行删除操作
+        $(pare).remove();
+        //遍历修改选项的值
+        changeItemOptionValue()
+    }
+
+}
+//批量更改选项框的值
+function changeItemOptionValue() {
+    // var all = window.PNUM.next - 1;
+    var labels = $("#dialog-according").children().eq(1).find('.package-label-textarea');
+    var all = labels.length;//获取当前总的元素个数
+    var exit = window.PNUM.cur;//获取当前原来返回的元素个数
+
+    var i;
+    var j = 65 + exit;
+    for(i=exit;i< all ;i++,j++){
+        var tstr = String.fromCharCode(j);
+        $(labels[i]).find('label').eq(0).text(tstr);
+        $(labels[i]).find('.item-textarea').attr('name','item['+tstr+'].title');//更改文字域 不带''
+        $(labels[i]).find('.ensure').attr('name',"item["+tstr+"].check");//更改选项框
+    }
 }
 
 

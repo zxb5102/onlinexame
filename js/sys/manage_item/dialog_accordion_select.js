@@ -49,7 +49,58 @@ function enablebtn() {
 /*function panelFlag(){
     this.flag = [true,true];
 }*/
+function panelNum(cur) {
+    this.already = false;
+    this.flag = false;
+    // this.id = id;
+    this.cur = cur;
+    this.next = cur + 1;
+}
+panelNum.prototype.setFalse = function () {
+    this.flag = false;
+}
+panelNum.prototype.setTrue = function () {
+    this.flag = true;
+}
+panelNum.prototype.setNum = function ( cur) {
+    if(this.flag == true ){
+        if( this.already == false){
+            this.cur = cur;
+            this.next = this.cur + 1;
+            this.already = true;
+        }else{
+            this.next = cur + 1;
+        }
+    }
+}
+panelNum.prototype.getChar = function(){
+    var i,j;
+    for( j=65,i=0;i<this.next-1;i++){
+        j++;
+    }
+    return String.fromCharCode(j);
+}
 
+window.PNUM = new panelNum( -1 );
+//当第二个选项窗口打开的时候 设置为TRUE
+$(function () {
+    $('#dialog-according').accordion({
+        onSelect:function ( title,index ) {
+            if( index == 1 && window.PNUM.flag == false ){
+                window.PNUM.setTrue();
+            }
+        }
+    });
+})
+//关闭窗口的时候把开关设置为FALSE
+$(function () {
+    $("#dlg").dialog({
+        onClose:function () {
+            window.PNUM.setFalse();
+            window.PNUM.already = false;
+        }
+    });
+})
 /*添加面板*/
 function addpanel(type) {
 
@@ -63,37 +114,53 @@ function addpanel(type) {
         tools:[{
             iconCls:'icon-add',
             handler:function(){
-                // console.log(123);
-                var date = new Date();
-                var min = date.getMinutes()+"";
-                var sec1 = date.getSeconds()+"";
-                var sec2 = date.getMilliseconds()+"";
-                var all = min+sec1+sec2;
+                if( window.PNUM.flag == true ){
+                    var date = new Date();
+                    var min = date.getMinutes()+"";
+                    var sec1 = date.getSeconds()+"";
+                    var sec2 = date.getMilliseconds()+"";
+                    var all = min+sec1+sec2;
+                    var e1;
+                    var labels = $("#dialog-according").children().eq(1).find('.package-label-textarea');
+                    var lnum = labels.length;
+                    window.PNUM.setNum( lnum );
+                    var tstr = window.PNUM.getChar();
+                    if( type === 'two'){
+                        e1 = $(labels[0]).clone(true,true);//默认克隆第一个节点
+                        e1.attr('index','-1');
 
-                var a1 = $("<textarea name='item["+all+"].title' class='item-textarea' >自定义</textarea>");
-                var a2 = $("<div class='package-textarea'></div>");
-                a2.append(a1);
+                        e1.find('.package-dv-label').eq(0).find('label').eq(0).text(tstr);
+                        e1.find('.easyui-linkbutton').eq(0).find('.l-btn-text').eq(0).text('删除');
 
-                // var b1 = $('<a class="easyui-linkbutton" href="javascript:void(0)" onclick="" >重置</a>');
-                var b2 = $('<input type="checkbox" class="ensure" name="item['+all+'].check" value="true" checked="checked">');
-                var b3 = $('<div class="package-dv-a"></div>');
-                // b3.append(b1);
-                b3.append(b2);
+                        e1.find('.item-textarea').text('').attr('name','item['+tstr+'].title');//默认文字为空
+                        e1.find('.ensure').attr('name',"item["+tstr+"].check").attr('checked','checked');//默认选中
 
-                var c1 = $("<label for='item-b-option'></label>");
-                var c2 = $('<div class="package-dv-label"></div>');
-                c2.append(c1);
+                    }else{
+                        var a1 = $("<textarea  name='item["+tstr+"].title' class='item-textarea' ></textarea>");
+                        var a2 = $("<div class='package-textarea'></div>");
+                        a2.append(a1);
 
-                var d1 = $("<div class='package-label'></div>");
-                d1.append(c2);
-                d1.append(b3);
+                        var b1 = $('<a  class="easyui-linkbutton" href="javascript:void(0)" onclick="" >删除</a>');
+                        b1.bind('click',resetbtn);
+                        var b2 = $('<input type="checkbox" class="ensure" name="item['+tstr+'].check" value="true" checked="checked">');
+                        var b3 = $('<div class="package-dv-a"></div>');
+                        b3.append(b1);
+                        b3.append(b2);
 
-                var e1 = $("<div class='package-label-textarea'></div>");
-                e1.append(d1);
-                e1.append(a2);
-                $('#dialog-according').children().eq(1).children().eq(1).append(e1);
-                // console.log(e1);
-                // debugger;
+                        var c1 = $("<label for='item-b-option'>"+tstr+"</label>");
+                        var c2 = $('<div class="package-dv-label"></div>');
+                        c2.append(c1);
+
+                        var d1 = $("<div class='package-label'></div>");
+                        d1.append(c2);
+                        d1.append(b3);
+
+                        var e1 = $("<div index= '-1' class='package-label-textarea'></div>");
+                        e1.append(d1);
+                        e1.append(a2);
+                    }
+                    $('#dialog-according').children().eq(1).children().eq(1).append(e1);
+                }
 
             }
         }],
@@ -117,8 +184,8 @@ function addpanel(type) {
 /*移除面板*/
 function  removepanel() {
     var $according = $('#dialog-according');
-    console.log($according.children());
-    console.log(typeof $according.children().length);
+    // console.log($according.children());
+    // console.log(typeof $according.children().length);
     if($according.children().length==3){
         $according.accordion('remove',1)
                     .accordion('remove',1);
