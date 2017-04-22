@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../../easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../../easyui/themes/icon.css">
+    <script type="text/javascript" src="../../easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="../../easyui/jquery.easyui.min.js"></script>
+    <!--当前页面的js-->
+    <script type="text/javascript" src="../../js/sys/manage_word/order_page2.js"></script>
+</head>
+<body>
+<div id="mm" class="easyui-menu" style="width:120px;">
+    <div>选择题</div>
+    <div>填空题</div>
+    <div>判断题</div>
+</div>
+<div style="width: 70%;margin: auto">
+    <div id="dev_left" style="width: 20%;float: left;">
+        <div class="easyui-panel">
+            <a href="#" class="easyui-linkbutton" style="display: block;margin: auto">下一步</a>
+        </div>
+        <div class="easyui-panel">
+            <a href="#" class="easyui-menubutton" data-options="menu:'#mm',iconCls:'icon-add'">添加题目</a>
+        </div>
+    </div>
+    <div id="dev_right" style="width: 80%;float: right;">
+        <div class="pack_all" style="height: 104px;margin-bottom: 20px ;border: 1px solid #cccccc;">
+            <div style="height: 104px;float: left;width: 25%;background-color: #FAEBD7;">
+                <div style="height:52px;">
+                    <div class="op_title" style="line-height: 52px;vertical-align: middle;width: 50px;margin: auto">
+                        选择题
+                    </div>
+                </div>
+                <div style="height: 52px;">
+                    <div style="width: 80px;margin:auto;padding-top: 13px">
+                        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'"
+                           style="width:80px;display: block">删除</a>
+                    </div>
+                </div>
+            </div>
+            <div style="float: right;width: 75%;">
+                <div style="">
+                    <div style="height: 52px;">
+                        <div style="height:22px">
+                            <span>数量：</span>
+                            <span class="flag_c" flag="true" style="color: #ff0000">请填写</span>
+                        </div>
+                            <span style="border: 1px solid #95B8E7;display: block;border-radius: 5px 5px 5px 5px;">
+                                <input class="page_input"
+                                       style="padding:0px 4px;height: 28px;line-height: 28px;margin: 0px;border: none;width: 97%;border-radius: 5px 5px 5px 5px;">
+                            </span>
+                    </div>
+                </div>
+                <div style="">
+                    <div style="height: 52px;">
+                        <div style="height:22px">
+                            <span>每题分数：</span>
+                            <span class="flag_c" flag="true" style="color: #ff0000">请填写</span>
+                        </div>
+                        <span style="border: 1px solid #95B8E7;display: block;border-radius: 5px 5px 5px 5px;">
+                                <input class="page_input"
+                                       style="padding:0px 4px;height: 28px;line-height: 28px;margin: 0px;border: none;width: 97%;border-radius: 5px 5px 5px 5px;">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../../easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../../easyui/themes/icon.css">
+    <script type="text/javascript" src="../../easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="../../easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../../easyui/plugins/datagrid-filter.js"></script>
+    <script type="text/javascript" src="../../easyui/plugins/datagrid-detailview.js"></script>
+    <!--当前文件的js和css-->
+    <link rel="stylesheet" type="text/css" href="../../css/sys/manage_word/order_page3.css">
+    <script type="text/javascript" src="../../js/sys/manage_word/order_page3.js"></script>
+</head>
+<body>
+<div data-options="" id="xxxx" class="easyui-accordion" style="width:80%;height:600px;float: left">
+    <div title="选择题" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
+        <table  border="false" noheader="true"  class="dg easyui-datagrid" title="CheckBox Selection on DataGrid" style="width:100%;height:500px"
+               data-options="collapsible:true,rownumbers:false,fitColumns:true,singleSelect:false,url:'../../json/sys/manage_word/order_page3.json',method:'get',idField:'id'">
+            <thead>
+            <tr>
+                <th data-options="checkbox:true,field:'ck'"></th>
+                <th field="id" width="5">编号</th>
+                <th field="source" width="8">来源</th>
+                <th field="type" width="5">题型</th>
+                <th field="text" width="50">题目</th>
+                <th field="answer" width="10">答案</th>
+                <th field="changedate" width="10">修改时间</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div title="多线题" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
+        <table border="false" noheader="true" class="dg easyui-datagrid" title="CheckBox Selection on DataGrid" style="width:100%;height:500px"
+               data-options="collapsible:true,rownumbers:false,fitColumns:true,singleSelect:false,url:'../../json/sys/manage_word/order_page3.json',method:'get',idField:'id'">
+            <thead>
+            <tr>
+                <th data-options="checkbox:true,field:'ck'"></th>
+                <th field="id" width="5">编号</th>
+                <th field="source" width="8">来源</th>
+                <th field="type" width="5">题型</th>
+                <th field="text" width="50">题目</th>
+                <th field="answer" width="10">答案</th>
+                <th field="changedate" width="10">修改时间</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div title="填空题" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
+        <table border="false" noheader="true" class="dg easyui-datagrid" title="CheckBox Selection on DataGrid" style="width:100%;height:500px"
+               data-options="collapsible:true,rownumbers:false,fitColumns:true,singleSelect:false,url:'../../json/sys/manage_word/order_page3.json',method:'get',idField:'id'">
+            <thead>
+            <tr>
+                <th data-options="checkbox:true,field:'ck'"></th>
+                <th field="id" width="5">编号</th>
+                <th field="source" width="8">来源</th>
+                <th field="type" width="5">题型</th>
+                <th field="text" width="50">题目</th>
+                <th field="answer" width="10">答案</th>
+                <th field="changedate" width="10">修改时间</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<div style="width: 18%;float: right;">
+    <div>
+        <div style="margin-bottom: 20px">
+            <div style="float:left;margin-right: 5%">单选题：</div>
+            <div  class="easyui-progressbar" style="width:50%;" value="50"></div>
+        </div>
+        <div style="margin-bottom: 20px">
+            <div style="float:left;margin-right: 5%">填空题：</div>
+            <div class="easyui-progressbar"  style="width:50%;"></div>
+        </div>
+        <div style="margin-bottom: 20px">
+            <div style="float:left;margin-right:5%">多选题：</div>
+            <div class="easyui-progressbar" style="width:50%;"></div>
+        </div>
+    </div>
+    <div>
+        <div >拖动改变题目的次序</div>
+        <ul style="margin:0;padding:0;">
+            <li class="drag-item">单选题</li>
+            <li class="drag-item">多选题</li>
+            <li class="drag-item">填空题</li>
+        </ul>
+    </div>
+    <div>
+        <a  href="javascript:void(0)" class="easyui-linkbutton" onclick="" style="display:block;margin:auto;width:50%">下一步</a>
+    </div>
+</div>
+</body>
+</html>

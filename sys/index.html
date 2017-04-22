@@ -16,12 +16,47 @@
 <div class="easyui-layout" fit="true" >
     <div data-options="region:'south',split:false" style="height:50px;"></div>
     <!--这个是左边的菜单-->
-    <div data-options="region:'west',split:false" title="菜单" style="width: 100px;">
-        <ul class="menu-ul">
-            <li><a class="btn-menu easyui-linkbutton" url="manage_word.html" href="javascript:void(0)">试卷管理</a></li>
+    <div data-options="region:'west',split:false" title="菜单" style="width: 200px;">
+<!--        <ul class="menu-ul">
+            <li><a class="btn-menu easyui-linkbutton" url="manage_word/manage_word.html" href="javascript:void(0)">试卷管理</a></li>
             <li><a class="btn-menu easyui-linkbutton"  url="manage_student.html" href="javascript:void(0)">考生管理</a></li>
-            <li><a class="btn-menu easyui-linkbutton"  url="manager_item/manage_item.html" href="javascript:void(0)">题库管理</a></li>
+            <li><a class="btn-menu easyui-linkbutton"  url="manage_item/manage_item.html" href="javascript:void(0)">题库管理</a></li>
             <li><a class="btn-menu easyui-linkbutton"  url="manage_dept.html" href="javascript:void(0)">部门管理</a></li>
+        </ul>-->
+        <ul class="easyui-tree" data-options="lines:true">
+            <li iconCls="icon-sys">
+                <span>后台系统管理</span>
+                <ul>
+                    <li iconCls="icon-pa">
+                        <span>试卷管理</span>
+                        <ul>
+                            <li>已经生成的试题</li>
+                            <li><a class="btn-menu"  url="manage_word/order_page.html" href="javascript:void(0)">定制试题</a></li>
+                        </ul>
+                    </li>
+                    <li iconCls="icon-stu">
+                        <span>考生管理</span>
+                        <ul>
+                            <li>考生成绩管理</li>
+                            <li>考生基本信息管理</li>
+                        </ul>
+                    </li>
+                    <li iconCls="icon-db">
+                        <span>题库管理</span>
+                        <ul>
+                            <li><a class="btn-menu"  url="manage_item/manage_item.html" href="javascript:void(0)">题库管理</a></li>
+                            <li>批量添加</li>
+                        </ul>
+                    </li>
+                    <li iconCls="icon-group">
+                        <span>部门管理</span>
+                        <ul>
+                            <li>部门试题管理</li>
+                            <li>部门信息管理</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </div>
     <!--这个是布局中间-->

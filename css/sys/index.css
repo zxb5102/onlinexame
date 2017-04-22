@@ -4,11 +4,33 @@
 }
 ul{
     list-style: none;
-
 }
 .menu-ul{
     padding-left: 20px;
 }
 .menu-ul li{
     margin-top: 10px;
+}
+/*控制鼠标的悬停效果 当前未实现*/
+.btn-menu{
+
+}
+/*下面的的css用来定制 icon 小图标*/
+.icon-db{
+    background:url('../../icons/databases-icon.png') no-repeat;
+}
+.icon-pa{
+    background:url('../../icons/page-white-text-width-icon.png') no-repeat;
+}
+.icon-stu{
+    background:url('../../icons/user-student-icon.png') no-repeat;
+}
+.icon-group{
+    background:url('../../icons/user-group-icon.png') no-repeat;
+}
+.icon-bse{
+    background:url('../../icons/gears.png') no-repeat;
+}
+.icon-sys{
+    background:url('../../icons/sys.png') no-repeat;
 }

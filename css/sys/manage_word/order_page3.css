@@ -1,0 +1,41 @@
+.icon-db{
+    background:url('../../../icons/databases-icon.png') no-repeat;
+}
+.icon-pa{
+    background:url('../../../icons/page-white-text-width-icon.png') no-repeat;
+}
+.icon-stu{
+    background:url('../../../icons/user-student-icon.png') no-repeat;
+}
+.icon-group{
+    background:url('../../../icons/user-group-icon.png') no-repeat;
+}
+.icon-bse{
+    background:url('../../../icons/gears.png') no-repeat;
+}
+.icon-sys{
+    background:url('../../../icons/sys.png') no-repeat;
+}
+.icon-filter {
+    background: url('../../../icons/filter.png') no-repeat center center;
+}
+
+
+.drag-item{
+    list-style-type:none;
+    display:block;
+    padding:5px;
+    border:1px solid #ccc;
+    margin:2px;
+    width:300px;
+    background:#fafafa;
+    color:#444;
+}
+.indicator{
+    position:absolute;
+    font-size:9px;
+    width:10px;
+    height:10px;
+    display:none;
+    color:red;
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../../easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../../easyui/themes/icon.css">
+    <script type="text/javascript" src="../../easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="../../easyui/jquery.easyui.min.js"></script>
+    <!--当前页面本身的js和css-->
+    <script type="text/javascript" src="../../js/sys/manage_word/order_page.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../css/sys/manage_word/manage_word.css">
+</head>
+<body>
+<div style="margin: auto;width: 500px;padding-top: 20px">
+    <div class="easyui-panel" title="新题目" style="width:100%;max-width:500px;padding:30px 60px;">
+        <div>
+            <div style="margin-bottom:20px">
+                <input id="word_name" missingMessage="必须添加" class="easyui-textbox" name="name" style="width:100%"
+                       data-options="label:'试题名称:',required:true" validType="req">
+            </div>
+            <div style="margin-bottom:20px">
+                <input id="get_style" class="easyui-combobox" style="width:100%" data-options="label:'组卷方式:',required:true,
+                    valueField: 'value',
+                    textField: 'key',
+                    url: '../../json/sys/manage_word/combin.json'">
+            </div>
+            <div style="margin-bottom:20px">
+                <span style="margin-right: 21px">详细信息：</span>
+                <input class="easyui-switchbutton"  >
+            </div>
+            <div id="page_detail" >
+
+                <div style="margin-bottom:20px">
+                    <input id="start_date" class="easyui-datebox" label="开始时间:" labelPosition="left" style="width:100%;">
+                </div>
+                <div style="margin-bottom:20px">
+                    <input id="end_date" class="easyui-datebox" label="结束时间:" labelPosition="left" style="width:100%;">
+                </div>
+                <div style="margin-bottom: 20px">
+                    <input id="succ_time" class="easyui-numberspinner" style="width:100%;" label="答卷时长：" labelPosition="left" data-options="">
+                </div>
+                <div style="margin-bottom:20px">
+                    <input id="word_category" class="easyui-combobox" style="width:100%" data-options="label:'试题分类:',required:true,
+                    valueField: 'value',
+                    textField: 'key',
+                    url: '../../json/sys/manage_word/pa_category.json'">
+                </div>
+                <div style="margin-bottom:20px">
+                    <input id="able_dept" class="easyui-combobox" style="width:100%" data-options="label:'可考部门:',required:true,
+                    valueField: 'value',
+                    textField: 'key',
+                    url: '../../json/sys/manage_word/dept_able.json'">
+                </div>
+                <div style="margin-bottom:20px">
+                    <input id="word_desc" class="easyui-textbox" label="描述:" labelPosition="left" multiline="true" value="" style="width:100%;height:120px">
+                </div>
+            </div>
+        </div>
+        <div style="text-align:center;padding:5px 0">
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitNext()" style="width:80px">下一步</a>
+        </div>
+    </div>
+</div>
+<script>
+$.extend($.fn.validatebox.defaults.rules, {
+    req: {
+        validator: function(value){
+            if( value.trim() == '' ){
+                return false;
+            }else{
+                return true;
+            }
+        },
+        message: '必须添加'
+    }
+});
+
+</script>
+</body>
+</html>
