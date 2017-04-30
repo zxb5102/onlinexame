@@ -247,39 +247,40 @@
 				if (input.data('textbox')){
 					input = input.textbox('textbox');
 				}
-				input.unbind('.filter').bind('keydown.filter', function(e){
+		/*		input.unbind('.filter').bind('keydown.filter', function(e){
 					var t = $(this);
 					if (this.timer){
 						clearTimeout(this.timer);
 					}
 					if (e.keyCode == 13){
-						_doFilter();
+						// _doFilter();
 					}else {
-						this.timer = setTimeout(function(){
-							_doFilter2();
-						}, opts.filterDelay);
+						// this.timer = setTimeout(function(){
+						// 	_doFilter2();
+						// }, opts.filterDelay);
 					}
 
-				});
-				function _doFilter2(){
+				}
+				);*/
+	/*			function _doFilter2(){
 					var rule = $(target)[name]('getFilterRule', field);
 					var value = input.val();
 					if (value != ''){
-/*						if ((rule && rule.value!=value) || !rule){
+						if ((rule && rule.value!=value) || !rule){
 							$(target)[name]('addFilterRule', {
 								field: field,
 								op: opts.defaultFilterOperator,
 								value: value
 							});
 							// $(target)[name]('doFilter');
-						}*/
+						}
 					} else {
 						if (rule){
 							$(target)[name]('removeFilterRule', field);
-							$(target)[name]('doFilter');
+							// $(target)[name]('doFilter');
 						}
 					}
-				}
+				}*/
 				function _doFilter(){
 					var rule = $(target)[name]('getFilterRule', field);
 					var value = input.val();

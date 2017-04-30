@@ -24,6 +24,8 @@ $(function(){
         }
     });
 });
+
+
 $(function () {
     $('#next_btu').bind('click',function () {
         // eq(0).progressbar('getValue')
@@ -173,3 +175,7 @@ $(function () {
             }
         }});
 });
+/*移除全选按钮*/
+$(function () {
+    $('.datagrid-header-check').find('input').remove();
+})
