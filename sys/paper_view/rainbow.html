@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>考试云平台</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="shortcut icon" href="http://community.kaoshixing.com/exam/static/newVersion/images/examstar_icon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="renderer" content="webkit">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Le styles -->
+    <link rel="stylesheet" type="text/css" href="rainbow_files/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="rainbow_files/uploadify.css">
+    <link rel="stylesheet" type="text/css" href="rainbow_files/style.css">
+    <!--<link rel="stylesheet" type="text/css" href="/static/ueditor/themes/default/css/ueditor.min.css">-->
+    <!--wangEditor style-->
+    <link rel="stylesheet" href="rainbow_files/wangEditor.css">
+    <link rel="stylesheet" href="rainbow_files/uploadFile.css">
+
+    <script type="text/javascript" src="rainbow_files/jquery.js"></script>
+
+    <!-- customer styles -->
+    <style>
+        .edui-toolbar {
+            line-height: 20px;
+        }
+
+        video {
+            width: 50%;
+            display: block;
+            margin-left: 50px;
+        }
+
+        .answers a {
+            text-decoration: none;
+            color: inherit;
+            cursor: default;
+        }
+
+        .pop-test3 span {
+            font-size: 24px;
+        }
+
+        .modal-dialog {
+            width: 350px;
+        }
+
+        .modal-header {
+            background-color: #5d9cec;
+            color: #fff;
+            font-size: 16px;
+            margin: 0px !important;
+            padding: 10px 25px !important;
+            text-align: center;
+        }
+
+        .alert-danger {
+            position: fixed;
+            width: 60%;
+            z-index: 1000;
+            top: 40%;
+            left: 20%;
+            text-align: center;
+            padding: 40px;
+            font-size: 30px;
+            border-radius: 15px;
+            color: #fff;
+            background-color: #ff5800;
+            border-color: #fd8100;
+        }
+
+        .tip {
+            position: absolute;
+        }
+
+        .expanding, .expanding-clone {
+            width: 500px !important;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        #copy {
+            display: inline-block;
+            height: 25px;
+            width: 70px;
+            text-align: center;
+            font-size: 12px;
+            line-height: 25px;
+            color: #333;
+            cursor: pointer;
+            background-color: #eee;
+            border: 1.5px dashed #777;
+            border-radius: 6px;
+            vertical-align: 5px;
+        }
+
+        audio {
+            margin: 0 0 -10px 0;
+        }
+
+        .questions dl {
+            padding: 30px;
+        }
+
+        .edui-default .edui-editor-toolbarbox {
+            position: relative !important;
+        }
+
+        .edui-editor div {
+            height: auto !important;
+        }
+
+        #webcam {
+            position: fixed;
+            z-index: 9999;
+        }
+
+        #webcam .glyphicon-remove {
+            position: absolute;
+            right: 0;
+            font-size: 18px;
+            border: 2px solid #5d9cec;
+            color: #5d9cec;
+            padding: 2px;
+            margin: 3px;
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        #cams, #loading {
+            position: fixed;
+            z-index: 9998;
+            color: #fff;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        #cams span {
+            display: inline-block !important;
+        }
+
+        .capture-status {
+            font-size: 1.3em;
+            color: #ff5800;
+            margin-left: 150px;
+            opacity: 0;
+            filter: opacity(alpha=0);
+            cursor: pointer;
+        }
+
+        .bootstrap-dialog {
+            z-index: 100000001;
+        }
+
+        [title_tip]:hover:after {
+            content: attr(title_tip);
+            padding: 5px 10px;
+            line-height: 18px;
+            text-align: left;
+            width: 80px !important;
+            margin: 15px 5px;
+            color: #fff;
+            position: absolute;
+            z-index: 20;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            -moz-box-shadow: 0px 0px 4px #222;
+            -webkit-box-shadow: 0px 0px 4px #222;
+            box-shadow: 0px 0px 4px #222;
+            background-color: #444;
+            opacity: 0.7;
+            filter: alpha(opacity=70);
+        }
+    </style>
+    <style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+    .en-markup-crop-options {
+        top: 18px !important;
+        left: 50% !important;
+        margin-left: -100px !important;
+        width: 200px !important;
+        border: 2px rgba(255, 255, 255, .38) solid !important;
+        border-radius: 4px !important;
+    }
+
+    .en-markup-crop-options div div:first-of-type {
+        margin-left: 0px !important;
+    }
+    </style>
+</head>
+
+<body class="main-page answer-style" id="exam_answer">
+
+<input id="exam_results_id_for_test" value="1749469" class="hidden" type="text">
+<div id="loading" style="display: none;">
+    <img src="rainbow_files/icon_loading.gif"
+         style="position:absolute;top: 30%;left: 40%;width:250px;border-radius: 30px;box-shadow: 2px 2px 5px #ccc;">
+</div>
+<div class="alert alert-danger" role="alert" style="display:none"></div>
+<div id="webcam">
+    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+</div>
+<form action="/exam/capture/" method="post" target="capture_iframe" style="display:none;" id="captureForm">
+    <iframe id="capture_iframe" name="capture_iframe" style="display:none;" width="1" height="1"></iframe>
+    <input name="exam_results_id" type="text">
+    <input name="question_id" type="text">
+</form>
+
+
+<div id="wrap">
+
+    <div id="header">
+        <div id="top">
+            <div id="logo" style="display: block;"><a href="javascript:void(0)" style="background-image: none;"><img
+                    src="images/toy.jpg" style=" height:47px;"></a></div>
+            <div id="accout">
+                <em></em><span>林风</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="content" class="clearfix">
+        <div class="paper">
+            <h3 class="submit_fixed stuckMenu" style="text-align: center; position: relative; top: 0px;">
+                <div class="l">
+                    <span class="time"><em></em><span class="timeDown">00:43:36</span></span>
+                    <span class="card"><em></em><a href="javascript:void(0)" class="hasShowCardLink">答题卡</a></span>
+                <span class="fontsize">
+                  <button class="btn fontsize-btn fontsize-btn-l" style="position:relative;top:-1px;">-</button>
+                  <em></em>
+                  <button class="btn fontsize-btn fontsize-btn-r">+</button>
+                </span>
+
+                </div>
+                <div class="r">
+                 <span class="conf">
+                    <a href="javascript:void(0)" class="btn btn-default examEndBtn"
+                       style="width:80px;height:30px;padding:4px 0px;color:white;">交卷</a>
+                 </span>
+                </div>
+            </h3>
+            <!--下面是试题的题型和题目-->
+            <div class="cont" style="margin-top: 0px;">
+                <h4>hello</h4>
+                <div class="questions">
+
+                    <div class="qh">
+
+                        <h5>单选题<span class="qh_detail">共1题，合计5.0分</span></h5>
+
+                    </div>
+
+                    <!--其中一道题-->
+                    <dl class="questionsContent" questionsid="58044e146b465410efe2efc4" hasanswered="false">
+
+
+                        <dt>
+                        <div class="icon-block">
+                            <label class="qIndex"><span class="index">1</span></label>
+                            <a name="questions_58044e146b465410efe2efc4"></a>
+
+                            <span class="qm"><em class="mark" num="questions_58044e146b465410efe2efc4"
+                                                 title_tip="标记试题"></em></span>
+
+                        </div>
+        <span class="qc">
+            
+            <span class="qf">（5.0分)</span>
+            
+            
+            <span class="qq">日常生活中邻里之间应。</span>
+            <!--插入图片示例-->
+            <div style="height:200px;padding-left:35px">
+                <img src="images/toy.jpg" style="height: 200px;">
+            </div>
+            
+        </span>
+                        <input name="questionsType" value="1" type="hidden">
+                        <input name="questionsAnswered" value="" type="hidden">
+                        </dt>
+    <span class="answers">
+        
+        <dd class="a">
+            <input class="radioOrCheck" questionstype="1" id="58044e146b465410efe2efc41"
+                   name="keyChk_questions_58044e146b465410efe2efc4" answername="key1" type="radio">
+            <label for="58044e146b465410efe2efc41">
+                <span class="qss"><span></span></span>
+                <a class="words">A. 互尊互谅 </a>
+            </label>
+        </dd>
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+    </span>
+
+    
+    <span class="answers">
+     
+            <dd class="b">
+                <input class="radioOrCheck" questionstype="1" id="58044e146b465410efe2efc42"
+                       name="keyChk_questions_58044e146b465410efe2efc4" answername="key2" type="radio">
+                <label for="58044e146b465410efe2efc42">
+                    <span class="qss"><span></span></span>
+                    <a class="words">B. 互不来往 </a>
+                </label>
+             </dd>
+     
+     
+     
+    </span>
+    
+
+    
+    <span class="answers">
+     
+            <dd class="c">
+                <input class="radioOrCheck" questionstype="1" id="58044e146b465410efe2efc43"
+                       name="keyChk_questions_58044e146b465410efe2efc4" answername="key3" onpaste="return false"
+                       oncopy="return false" type="radio">
+                <label for="58044e146b465410efe2efc43">
+                    <span class="qss"><span></span></span>
+                    <a class="words">C. 不必考虑邻里关系 
+ </a>
+                </label>
+                <!-- onclick="sb(this)"-->
+             </dd>
+     
+     
+     
+    </span>
+
+
+                    </dl>
+                    <dl class="questionsContent" questionsid="58044e146b465410efe2efa4" hasanswered="false">
+                        <dt>
+                        <div class="icon-block">
+                            <label class="qIndex"><span class="index">2</span></label>
+                            <a name="questions_58044e146b465410efe2efa4"></a>
+                            <span class="qm"><em class="mark" num="questions_58044e146b465410efe2efa4" title_tip="标记试题"></em></span>
+                        </div>
+    <span class="qc">
+        <span class="qf">（5.0分)</span>
+        <span class="qq">日常生活中邻里之间应。</span>
+    </span>
+                        <input type="hidden" name="questionsType" value="1">
+                        <input type="hidden" name="questionsAnswered" value="">
+                        </dt>
+    <span class="answers">
+        <dd class="a">
+            <input type="radio" class="radioOrCheck" questionstype="1" id="58044e146b465410efe2efa41"
+                   name="keyChk_questions_58044e146b465410efe2efa4" answername="key1">
+            <label for="58044e146b465410efe2efa41">
+                <span class="qss"><span></span></span>
+                <a class="words">A. 互尊互谅 </a>
+            </label>
+        </dd>
+    </span>
+    <span class="answers">
+            <dd class="b">
+                <input type="radio" class="radioOrCheck" questionstype="1" id="58044e146b465410efe2efa42"
+                       name="keyChk_questions_58044e146b465410efe2efa4" answername="key2">
+                <label for="58044e146b465410efe2efa42">
+                    <span class="qss"><span></span></span>
+                    <a class="words">B. 互不来往 </a>
+                </label>
+             </dd>
+    </span>
+    <span class="answers">
+            <dd class="c">
+                <input type="radio" class="radioOrCheck" questionstype="1" id="58044e146b465410efe2efa43"
+                       name="keyChk_questions_58044e146b465410efe2efa4" answername="key3" onpaste="return false"
+                       oncopy="return false">
+                <label for="58044e146b465410efe2efa43">
+                    <span class="qss"><span></span></span>
+                    <a class="words">C. 不必考虑邻里关系</a>
+                </label>
+             </dd>
+    </span>
+                    </dl>
+                </div>
+                <div class="questions">
+
+                    <div class="qh">
+
+                        <h5>多选题<span class="qh_detail">共1题，合计5.0分，漏选错选不得分</span></h5>
+
+                    </div>
+
+
+                    <dl class="questionsContent" questionsid="58044e146b465410efe2efcc" hasanswered="false">
+
+
+                        <dt>
+                        <div class="icon-block">
+                            <label class="qIndex"><span class="index">1</span></label>
+                            <a name="questions_58044e146b465410efe2efcc"></a>
+
+                            <span class="qm"><em class="mark" num="questions_58044e146b465410efe2efcc"
+                                                 title_tip="标记试题"></em></span>
+
+                        </div>
+        <span class="qc">
+            
+            <span class="qf">（5.0分)</span>
+            
+            
+            <span class="qq">以接待对象为标准划分的接待类型有
+</span>
+            
+        </span>
+
+                        <input name="questionsType" value="2" type="hidden">
+                        <input name="questionsAnswered" value="" type="hidden">
+
+                        </dt>
+    
+
+
+                    
+                    
+    
+    <span class="answers">
+        
+
+        
+        <dd class="a">
+            <input class="radioOrCheck" questionstype="2" id="58044e146b465410efe2efcc1" name="key1" answername="key1"
+                   type="checkbox">
+            <label for="58044e146b465410efe2efcc1">
+                <span class="qms"><span></span></span>
+                <a class="words">A. 公务接待
+ </a>
+            </label>
+        </dd>
+        
+
+        
+
+        
+
+        
+
+        
+    </span>
+
+    
+    <span class="answers">
+     
+     
+            <dd class="b">
+                <input class="radioOrCheck" questionstype="2" id="58044e146b465410efe2efcc2" name="key2"
+                       answername="key2" onpaste="return false" oncopy="return false" type="checkbox">
+                <label for="58044e146b465410efe2efcc2">
+                    <span class="qms"><span></span></span>
+                    <a class="words">B. 商务接待
+ </a>
+                </label>
+             </dd>
+     
+     
+    </span>
+    
+
+    
+    <span class="answers">
+     
+     
+            <dd class="c">
+                <input class="radioOrCheck" questionstype="2" id="58044e146b465410efe2efcc3" name="key3"
+                       answername="key3" onpaste="return false" oncopy="return false" type="checkbox">
+                <label for="58044e146b465410efe2efcc3">
+                    <span class="qms"><span></span></span>
+                    <a class="words">C. 上访接待
+ </a>
+                </label>
+             </dd>
+     
+     
+    </span>
+    
+
+    
+    <span class="answers">
+     
+     
+            <dd class="d">
+                <input class="radioOrCheck" questionstype="2" id="58044e146b465410efe2efcc4" name="key4"
+                       answername="key4" onpaste="return false" oncopy="return false" type="checkbox">
+                <label for="58044e146b465410efe2efcc4">
+                    <span class="qms"><span></span></span>
+                    <a class="words">D. 消费接待
+ </a>
+                </label>
+             </dd>
+     
+     
+    </span>
+    
+
+    
+    <span class="answers">
+         
+         
+                <dd class="e">
+                    <input class="radioOrCheck" questionstype="2" id="58044e146b465410efe2efcc5" name="key5"
+                           answername="key5" onpaste="return false" oncopy="return false" type="checkbox">
+                    <label for="58044e146b465410efe2efcc5">
+                        <span class="qms"><span></span></span>
+                        <a class="words">E. 朋友接待
+ </a>
+                    </label>
+                 </dd>
+         
+         
+    </span>
+
+
+                    </dl>
+
+
+                </div>
+                <div class="questions">
+                    <div class="qh">
+                        <h5>图像填空题<span class="qh_detail">共1 题，这个是一个测试（10分）</span></h5>
+                    </div>
+                    <dl class="questionsContent" questionsid="68044e146b465410efe2efcc" hasanswered="false">
+                        <dt>
+                            <div class="icon-block">
+                                <label class="qIndex"><span class="index">1</span></label>
+                                <a name="questions_68044e146b465410efe2efcc"></a>
+                                <span class="qm">
+                                    <em class="mark" num="questions_68044e146b465410efe2efcc"
+                                                     title_tip="标记试题">
+                                    </em>
+                                </span>
+                            </div>
+                            <span class="qc">
+                                <span class="qf">（5.0分)</span>
+                                <span class="qq">以接待对象为标准划分的接待类型有</span>
+                            </span>
+                            <input name="questionsType" value="2" type="hidden">
+                            <input name="questionsAnswered" value="" type="hidden">
+                        </dt>
+
+                        <span class="answers">
+                    <dd class="a">
+                        <input class="radioOrCheck" questionstype="2" id="68044e146b465410efe2efcc1" name="key1" answername="key1"
+                               type="checkbox">
+                        <label for="68044e146b465410efe2efcc1">
+                            <span class="qms"><span></span></span>
+                            <a class="words">A. 公务接待</a>
+                        </label>
+                    </dd>
+                        </span>
+                        <span class="answers">
+                                <dd class="b">
+                                    <input class="radioOrCheck" questionstype="2" id="68044e146b465410efe2efcc2" name="key2"
+                                           answername="key2" onpaste="return false" oncopy="return false" type="checkbox">
+                                    <label for="68044e146b465410efe2efcc2">
+                                        <span class="qms"><span></span></span>
+                                        <a class="words">B. 商务接待</a>
+                                    </label>
+                                 </dd>
+                        </span>
+                        <span class="answers">
+                                <dd class="c">
+                                    <input class="radioOrCheck" questionstype="2" id="68044e146b465410efe2efcc3" name="key3"
+                                           answername="key3" onpaste="return false" oncopy="return false" type="checkbox">
+                                    <label for="68044e146b465410efe2efcc3">
+                                        <span class="qms"><span></span></span>
+                                        <a class="words">C. 上访接待
+                     </a>
+                                    </label>
+                                 </dd>
+
+
+                        </span>
+                        <span class="answers">
+                                <dd class="d">
+                                    <input class="radioOrCheck" questionstype="2" id="68044e146b465410efe2efcc4" name="key4"
+                                           answername="key4" onpaste="return false" oncopy="return false" type="checkbox">
+                                    <label for="68044e146b465410efe2efcc4">
+                                        <span class="qms"><span></span></span>
+                                        <a class="words">D. 消费接待
+                     </a>
+                                    </label>
+                                 </dd>
+
+
+                        </span>
+                        <span class="answers">
+                        <dd class="e">
+                            <input class="radioOrCheck" questionstype="2" id="68044e146b465410efe2efcc5" name="key5"
+                                   answername="key5" onpaste="return false" oncopy="return false" type="checkbox">
+                            <label for="68044e146b465410efe2efcc5">
+                                <span class="qms"><span></span></span>
+                                <a class="words">E. 朋友接待
+         </a>
+                            </label>
+                         </dd>
+
+
+            </span>
+                        <!--预览试题的答案解析-->
+                        <div class="question_answer">
+                            <div class="answerRight">
+                                正确答案：
+                                <span class="a_rt">前不过眉，侧不过耳，后不触及西服领</span>
+
+            <span class="a_wg hasError">
+
+            </span>
+                            </div>
+                            <div class="answerAnalysis">
+                                答案解析：
+            <span class="a_alys">
+
+               无
+
+            </span>
+                            </div>
+
+                        </div>
+                    </dl>
+                </div>
+                <div class="questions">
+
+                    <div class="qh">
+
+                        <h5>判断题<span class="qh_detail">共1题，合计5.0分</span></h5>
+
+                    </div>
+
+
+
+
+
+                    <dl class="questionsContent" questionsid="58044e146b465410efe2efc9" hasanswered="false">
+
+
+
+                        <dt>
+                        <div class="icon-block">
+                            <label class="qIndex"><span class="index">1</span></label>
+                            <a name="questions_58044e146b465410efe2efc9"></a>
+
+                            <span class="qm"><em class="mark" num="questions_58044e146b465410efe2efc9" title_tip="标记试题"></em></span>
+
+                        </div>
+        <span class="qc">
+
+            <span class="qf">（5.0分)</span>
+
+
+            <span class="qq">与他人交谈完毕就可以立即转身离开。
+</span>
+
+        </span>
+
+                        <input type="hidden" name="questionsType" value="3">
+                        <input type="hidden" name="questionsAnswered" value="">
+
+                        </dt>
+
+
+
+
+
+
+    <span class="answers">
+
+
+
+
+
+        <dd class="rt">
+            <input type="radio" class="radioOrCheck" questionstype="3" id="58044e146b465410efe2efc91" name="keyJudge_questions_58044e146b465410efe2efc9" answername="key1" value="1">
+            <label for="58044e146b465410efe2efc91">
+                <span class="qjr">√</span>
+                <a class="words"> 正确 </a>
+            </label>
+        </dd>
+        <dd class="wg">
+            <input type="radio" class="radioOrCheck" questionstype="3" id="58044e146b465410efe2efc92" name="keyJudge_questions_58044e146b465410efe2efc9" answername="key2" value="0">
+            <label for="58044e146b465410efe2efc92">
+                <span class="qjw">×</span>
+                <a class="words">错误</a>
+            </label>
+        </dd>
+
+
+
+
+
+
+
+    </span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </dl>
+
+
+
+                </div>
+                <div class="questions">
+
+                    <div class="qh">
+
+                        <h5>填空题<span class="qh_detail">共1题，合计5.0分</span></h5>
+
+                    </div>
+
+
+
+
+
+                    <dl class="questionsContent" questionsid="58044e146b465410efe2efcf" hasanswered="false">
+
+
+
+                        <dt>
+                        <div class="icon-block">
+                            <label class="qIndex"><span class="index">1</span></label>
+                            <a name="questions_58044e146b465410efe2efcf"></a>
+
+                            <span class="qm"><em class="mark" num="questions_58044e146b465410efe2efcf" title_tip="标记试题"></em></span>
+
+                        </div>
+        <span class="qc">
+
+            <span class="qf">（5.0分)</span>
+
+
+            <span class="qq">男性公务员应保持面部清洁，不蓄胡须，不留大鬓角（）（）（）发长要求
+</span>
+
+        </span>
+
+                        <input type="hidden" name="questionsType" value="4">
+                        <input type="hidden" name="questionsAnswered" value="">
+
+                        </dt>
+
+
+
+
+
+
+    <span class="answers">
+
+
+
+
+
+
+
+        <dd class="filled">
+            <div class="input-group">
+                <!--填空题的选项示例-->
+                <span class="input-group-addon" style="display: block;border: 0px;color: red;">1</span>
+                <div class="expanding-wrapper" style="position:relative"><textarea name="key1" questionstype="4" class="keyFill form-control expanding" onpaste="return false" oncopy="return false" style="margin: 0px; box-sizing: border-box; width: 100%; position: absolute; top: 0px; left: 0px; height: 100%; resize: none; overflow: auto;"></textarea><pre class="expanding-clone" style="margin: 0px; box-sizing: border-box; width: 100%; display: block; border: 1px solid; visibility: hidden; min-height: 30px; white-space: pre-wrap; line-height: 24px; text-decoration: none solid rgb(85, 85, 85); font-size: 14px; font-family: &quot;Microsoft YaHei&quot;; word-break: normal; padding: 6px 12px;"><span></span><br></pre></div>
+            </div>
+        </dd>
+
+
+
+
+
+    </span>
+
+
+    <span class="answers">
+
+
+
+            <dd class="filled">
+                <div class="input-group">
+                    <span class="input-group-addon" style="display: block;border: 0px;color: red;">2</span>
+                    <div class="expanding-wrapper" style="position:relative"><textarea name="key2" questionstype="4" class="keyFill form-control expanding" onpaste="return false" oncopy="return false" style="margin: 0px; box-sizing: border-box; width: 100%; position: absolute; top: 0px; left: 0px; height: 100%; resize: none; overflow: auto;"></textarea><pre class="expanding-clone" style="margin: 0px; box-sizing: border-box; width: 100%; display: block; border: 1px solid; visibility: hidden; min-height: 30px; white-space: pre-wrap; line-height: 24px; text-decoration: none solid rgb(85, 85, 85); font-size: 14px; font-family: &quot;Microsoft YaHei&quot;; word-break: normal; padding: 6px 12px;"><span></span><br></pre></div>
+                </div>
+             </dd>
+
+    </span>
+
+
+
+    <span class="answers">
+
+
+
+            <dd class="filled">
+                <div class="input-group">
+                    <span class="input-group-addon" style="display: block;border: 0px;color: red;">3</span>
+                    <div class="expanding-wrapper" style="position:relative"><textarea name="key3" questionstype="4" class="keyFill form-control expanding" onpaste="return false" oncopy="return false" style="margin: 0px; box-sizing: border-box; width: 100%; position: absolute; top: 0px; left: 0px; height: 100%; resize: none; overflow: auto;"></textarea><pre class="expanding-clone" style="margin: 0px; box-sizing: border-box; width: 100%; display: block; border: 1px solid; visibility: hidden; min-height: 30px; white-space: pre-wrap; line-height: 24px; text-decoration: none solid rgb(85, 85, 85); font-size: 14px; font-family: &quot;Microsoft YaHei&quot;; word-break: normal; padding: 6px 12px;"><span></span><br></pre></div>
+                </div>
+             </dd>
+
+    </span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </dl>
+
+
+
+                </div>
+                <div class="questions">
+
+                    <div class="qh">
+
+                        <h5>问答题<span class="qh_detail">共1题，合计5.0分</span></h5>
+
+                    </div>
+
+
+
+
+
+                    <dl class="questionsContent" questionsid="55044e146b465410efe2efcf"  hasanswered="false">
+
+
+
+                        <dt>
+                        <div class="icon-block">
+                            <label class="qIndex"><span class="index">1</span></label>
+                            <a name="questions_55044e146b465410efe2efcf"></a>
+
+                            <span class="qm"><em class="mark" num="questions_55044e146b465410efe2efcf" title_tip="标记试题"></em></span>
+
+                        </div>
+        <span class="qc">
+
+            <span class="qf">（5.0分)</span>
+
+
+            <span class="qq">男性公务员应保持面部清洁，不蓄胡须，不留大鬓角（）（）（）发长要求
+</span>
+
+        </span>
+
+                        <input type="hidden" name="questionsType" value="4">
+                        <input type="hidden" name="questionsAnswered" value="">
+
+                        </dt>
+
+    <span class="answers">
+
+
+
+
+
+
+        <!--问答题文本框示例-->
+        <dd class="filled">
+            <div class="control-input">
+                <textarea  class="keyFill"  style="resize:none;height:200px;"></textarea>
+            </div>
+        </dd>
+
+
+
+
+
+    </span>
+
+                    </dl>
+
+                </div>
+            </div>
+        </div>
+    </div>
+<!--    <script type="text/plain" style="width:1024px;height:500px;display:none" name="key1" id="editor"
+            oncontextmenu="self.event.returnValue=false" onselectstart="return false" onpaste="return false"
+            oncopy="return false"></script>-->
+
+    <!--答题卡-->
+    <div style=" padding:100px; display:none" id="numberCardDom">
+        <div class="answer-card">
+            <h3>
+                <div class="l"></div>
+                <span class="tit">答题卡</span>
+                <div class="r">
+                    <a class="card-off" href="javascript:void(0)"></a>
+                </div>
+            </h3>
+            <div class="cont">
+                <p class="intro">
+                    说明：
+                    <span><em class="s1"></em>未完成</span>
+                    <span><em class="s2"></em>已完成</span>
+                    <span><em class="s4"></em>标记</span>
+                </p>
+                <dl>
+                    <dt>单选题</dt>
+                    <dd class="s3">
+                        <a questionsidhref="58044e146b465410efe2efc4"
+                           class="iconBox icon_answer_no questions_58044e146b465410efe2efc4"
+                           num="questions_58044e146b465410efe2efc4" hasanswered="false">1</a>
+                    </dd>
+                    <dd class="s4">
+                        <a questionsidhref="58044e146b465410efe2efa4"
+                           class="iconBox icon_answer_no questions_58044e146b465410efe2efa4"
+                           num="questions_58044e146b465410efe2efa4" hasanswered="false">2</a>
+                    </dd>
+
+                    <dt>多选题</dt>
+                    <dd class="s1">
+                        <a questionsidhref="58044e146b465410efe2efcc"
+                           class="iconBox icon_answer_no questions_58044e146b465410efe2efcc"
+                           num="questions_58044e146b465410efe2efcc" hasanswered="false">1</a>
+                    </dd>
+
+                    <dt>填空题</dt>
+                    <dd class="s1">
+                        <a questionsidhref="68044e146b465410efe2efcc"
+                           class="iconBox icon_answer_no questions_68044e146b465410efe2efcc"
+                           num="questions_68044e146b465410efe2efcc" hasanswered="false">1</a>
+                    </dd>
+
+                    <dt>判断题</dt>
+                    <dd class="s1">
+                        <a questionsidhref="58044e146b465410efe2efc9" class="iconBox questions_58044e146b465410efe2efc9 icon_answer_answered" num="questions_58044e146b465410efe2efc9" hasanswered="false">1</a>
+                    </dd>
+
+                    <dt>有空题</dt>
+                    <dd class="s1">
+                        <a questionsidhref="58044e146b465410efe2efcf" class="iconBox questions_58044e146b465410efe2efcf icon_answer_answered" num="questions_58044e146b465410efe2efcf" hasanswered="false">1</a>
+                    </dd>
+
+                    <dt>问答题</dt>
+                    <dd class="s1">
+                        <a questionsidhref="55044e146b465410efe2efcf" class="iconBox questions_55044e146b465410efe2efcf icon_answer_answered" num="questions_55044e146b465410efe2efcf" hasanswered="false">1</a>
+                    </dd>
+                </dl>
+
+                <div class="btn-div">
+                    <button type="button" class="btn btn-default examEndBtn">立即交卷</button>
+                    <br><br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+
+<div class="modal fade ksx" id="blurCount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">提示信息</h4>
+            </div>
+            <div class="modal-body" style="padding-top:60px;padding-bottom:40px;text-align:center;">
+                <p class="cont_main" style="font-size:18px;"></p>
+                <div class="btn-div">
+                    <button type="button" class="btn btn-default closeBlurCount" style="margin:15px;">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="maskDiv"
+     style=" background-color:#000; padding-top:250px; top:0px;width:100%; height:100%; position: fixed; z-index:10000; text-align:center;filter:alpha(opacity=50);  -moz-opacity:0.5;-khtml-opacity: 0.5;opacity: 0.5; display:none">
+    <img src="rainbow_files/ajax-loader.gif" style="display:none">
+</div>
+<iframe name="fileup_iframe" id="fileupIframe" class="hidden"></iframe>
+
+<script type="text/javascript" src="rainbow_files/bootstrap.js"></script>
+
+<script type="text/javascript" src="rainbow_files/json3.js"></script>
+<script type="text/javascript" src="rainbow_files/jquery_003.js"></script>
+<script src="rainbow_files/stickUp.js"></script>
+<script type="text/javascript" src="rainbow_files/expanding.js"></script>
+<script type="text/javascript" src="rainbow_files/screenfull.js"></script>
+<script type="text/javascript" src="rainbow_files/jquery_002.js"></script>
+<script type="text/javascript" src="rainbow_files/swfobject.js"></script>
+<script type="text/javascript" src="rainbow_files/recorder.js"></script>
+<script type="text/javascript">
+
+    jQuery(function ($) {
+        $(document).ready(function () {
+            //enabling stickUp on the '.navbar-wrapper' class
+            $('.submit_fixed').stickUp();
+        });
+    });
+
+    (function ($) {
+        $(document).ready(function () {
+            if ($.isFunction($.bootstrapIE6)) $.bootstrapIE6($(document));
+        });
+    })(jQuery);
+
+    /*考试时间定义*/
+    var answer_time = "500000";
+//    var set_full_screen = "1";//防作弊参数
+    var restTime = 0;
+    var timeLimit = false;
+    /*控制是否是一个预览的试题*/
+    var view_flag = false;
+    /*var exam_info_id = "40804"; //考试ID
+     var exam_results_id = "1749469"; //考试关联ID
+
+     var blur_count = "3";//切换次数
+     var domain = "com.exame"
+     var examinee_user_name = "admin@com.exame";
+     var jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE0OTM2MTg4OTIuNzI1ODYyfQ.YBeyayzBFUXLRXx8hQG-MmJ_vnhIE-Gd8nW1Tvf9pSA";
+
+     var version = "53";
+     var timeLimit = "False";
+     var platform = "windows";*/
+
+
+    /*$("#exam_answer").click(function () {
+        if (screenfull.enabled && set_full_screen == 0) {
+            screenfull.request();
+        }
+    });*/
+//    var capture = "False";
+    $(".examEndBtn").bind('click',function () {
+//       alert(123);
+    });
+
+
+    $(document).ready(function () {
+
+        answer_time = parseInt(answer_time);
+        //  考试时间倒计时
+        timeDown();
+    });
+    // 在试卷未完全加载完之前一直显示加载中，不能答题，加载完之后正常答题
+    window.onload = function () {
+        $("#loading").hide();
+    }
+
+    //倒计时
+    function timeDown() {
+        if (answer_time == 0) {
+            $(".timeDown").removeClass("warning");
+            $(".timeDown").text("考试结束");
+            alert("考试时间到！");
+//            if (check_subsidiary(domain)) {
+//                $(".examEndJumpBtn").hide();
+//            }
+            //saveExamFn();
+            alert('保存试题');
+        }
+        if (answer_time == 10) {
+            $(".timeDown").addClass("warning");
+        }
+        var day = Math.floor(answer_time / 86400);
+        var day_left = answer_time - 86400 * day;
+        var hour = Math.floor(day_left / 3600);
+        var hour_left = day_left - 3600 * hour;
+        var minutes = Math.floor(hour_left / 60);
+        var seconds = hour_left - 60 * minutes;
+        time_show = (day == 0 ? '' : (day + '天:')) + (hour < 10 ? '0' + hour : hour) + ':' + (minutes < 10 ? '0' + minutes : minutes) +
+                ':' + (seconds < 10 ? '0' + seconds : seconds);
+        $(".timeDown").text(time_show);
+        answer_time = answer_time - 1;
+        setTimeout("timeDown()", 1000);
+    }
+</script>
+<script type="text/javascript" src="rainbow_files/basic.js"></script>
+<script type="text/javascript" src="rainbow_files/bootstrap-dialog.js"></script>
+<script type="text/javascript" src="rainbow_files/exam_answer.js"></script>
+<script src="rainbow_files/wangEditor.js"></script>
+<script src="rainbow_files/uploadFile.js"></script>
+<script type="text/javascript" src="rainbow_files/admin_main.js"></script>
+<script>
+    /*控制不允许复制*/
+    $(function () {
+        $(document).on('contextmenu copy', function () {
+            return false;
+        });
+    });
+</script>
+
+
+</body>
+</html>

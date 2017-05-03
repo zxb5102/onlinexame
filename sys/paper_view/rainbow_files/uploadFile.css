@@ -1,0 +1,31 @@
+.file-list {
+    list-style: none;
+    margin-top: 10px;
+    padding: 0;
+    line-height:normal;
+}
+.file-list li {
+    list-style: none;
+    padding: 5px 10px;
+    line-height: normal;
+    border: 1px solid #ccc;
+    display: inline-block;
+}
+.file-list li:hover {
+    border: 1px solid #999;
+}
+.file-list li a {
+    font-size: 15px;
+    cursor: pointer;
+    display: inline-block;
+}
+.file-list li a:hover {
+    color: #188DFF;
+}
+.file-list li i {
+    color: red;
+    cursor: default;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+}

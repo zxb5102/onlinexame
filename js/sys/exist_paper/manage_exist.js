@@ -243,7 +243,16 @@ function removePaper(sel) {
 }
 /*预览试题点击方法*/
 function viewPaper() {
-    console.log('view_paper');
+    // $().
+    var flag = $('#dg').datagrid('getSelected');
+    if( flag != null ){
+        var hf = window.location.href;
+        var next_hf = hf.substring(0,hf.lastIndexOf('/'));
+        next_hf = next_hf.substring(0,next_hf.lastIndexOf('/')) + '/paper_view/rainbow.html';
+        window.location.href = next_hf;
+        console.log('view_paper');
+    }
+
 }
 
 /*保存按钮触发事件*/
