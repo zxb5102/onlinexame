@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../../easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../../easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../../css/sys/student_base/student_base.css">
+</head>
+<body>
+<!--数据表格-->
+<table id="dg"></table>
+<div id="tb">
+    <!--负责 新建 编辑 删除 操作的功能提供-->
+    <div class="box">
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true"
+           onclick="newItem()">添加</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+           onclick="destroyItem()">删除</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-secure" plain="true" onclick="openDlg()">安全设置</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-xls" plain="true" onclick="getPdf()">导出</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="search_dg()">搜索</a>
+    </div>
+    <!--负责搜索功能的提供-->
+    <div class="box">
+        <form id="fm">
+            <div class="left">
+                <div><input name="s_name" class="easyui-textbox" data-options="label:'姓名'" style="width:200px"></div>
+                <div class="middle"></div>
+                <div><input name="s_sex" class="easyui-combobox"
+                            data-options="
+                    label:'性别',
+                    valueField:'key',
+                    textField:'value',
+                    editable:false,
+                    data:[
+                        {'key':'man','value':'男'},
+                        {'key':'woman','value':'女'}
+                    ]
+                    " style="width:200px"></div>
+            </div>
+            <div class="left">
+                <div><input name="s_dept" class="easyui-combobox"
+                            data-options="
+                    method:'get',
+                    label:'所属部门',
+                    valueField:'key',
+                    textField:'value',
+                    editable:false,
+                    url:'../../json/sys/student_base/student_dept.json',
+                    method:'get'
+            " style="width:200px"></div>
+                <div class="middle"></div>
+                <div><input name="s_phone" class="easyui-numberbox" data-options="label:'联系电话'" style="width:200px"></div>
+            </div>
+            <div class="left">
+                <div><input name="s_email" class="easyui-textbox" data-options="label:'邮箱',validType:'email'" style="width:200px"></div>
+                <div class="middle"></div>
+                <div><input name="s_idy" class="easyui-numberbox" data-options="label:'身份证号'" style="width:200px"></div>
+            </div>
+            <div class="left">
+                <div><input name="s_address" class="easyui-textbox" data-options="label:'地址'" style="width:200px"></div>
+                <div class="middle"></div>
+                <div><input name="s_job" class="easyui-textbox" data-options="label:'工作'" style="width:200px"></div>
+            </div>
+            <div class="left">
+            <input name="s_remark" class="easyui-textbox" data-options="label:'备注'" style="width:200px">
+        </div>
+        </form>
+        <div class="cls"></div>
+    </div>
+    <!--安全设置的对话框按钮-->
+    <div id="dlg-buttons">
+        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="secure()" style="width:90px">保存</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="closeSec()" style="width:90px">取消</a>
+    </div>
+    <style>
+        .label{
+            width: 50%;
+            display:inline-block;
+            margin-right: 20px;
+        }
+    </style>
+    <!--安全设置的对话框-->
+    <div id="dlg" class="easyui-dialog" style="width:400px"
+         closed="true" buttons="#dlg-buttons">
+        <div style="margin:0;padding:20px 50px">
+            <div>
+                <label for="disable_s" class="label">禁用考生</label>
+                <input class="easyui-switchbutton" id="disable_s" flag="false"
+                       data-options="
+                       checked:false,
+                       onText:'是',
+                       offText:'否'
+                       ">
+            </div>
+            <div>
+                <label for="change_pwd" class="label">是否更改密码</label>
+                <input class="easyui-switchbutton" id="change_pwd" flag="false"
+                       data-options="
+                       checked:false,
+                       onText:'是',
+                       offText:'否'
+                       ">
+            </div>
+            <div id="pwd" style="display: none">
+                <!--<label for="pwd1" class="label">新密码</label>-->
+                <div>
+                    <input id="pwd1" class="easyui-textbox" type="password"
+                           data-options="
+                        width:'250px',
+                        required:true,
+                        label:'新密码'
+                   ">
+                </div>
+                <!--<label for="pwd2" class="label">确认密码</label>-->
+                <div>
+                    <input id="pwd2" class="easyui-textbox" type="password"
+                           data-options="
+                        width:'250px',
+                        required:true,
+                        label:'确认密码'
+                   " validType="equals['#pwd1']">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</body>
+<script type="text/javascript" src="../../easyui/jquery.min.js"></script>
+<script type="text/javascript" src="../../easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../../easyui/plugins/datagrid-detailview.js"></script>
+<script type="text/javascript" src="../../js/sys/student_base/student_base.js"></script>
+</html>

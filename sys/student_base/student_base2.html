@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+    <meta charset="UTF-8">
+    <style>
+        .left {
+            float: left;
+            margin-right: 20px;
+        }
+
+        .right {
+            float: right;
+        }
+        .cls{
+            clear: both;
+        }
+        .middle{
+            margin:10px 0px;
+        }
+        .box{
+            padding:5px;
+        }
+    </style>
+</head>
+<body>
+<form method="post">
+    <div class="box">
+        <div class="left">
+            <input name="s_name" data-options="labelPosition:'top',label:'姓名',required:'true'" class="easyui-textbox">
+            <div class="middle"></div>
+            <input name="s_sex" class="easyui-combobox"
+                   data-options="
+               labelPosition:'top'
+               ,label:'性别'
+               ,editable:false
+               ,required:'true'
+               ,valueField:'key'
+               ,textField:'value'
+               ,data:[
+                    {key:'man',value:'男'},
+                    {key:'woman',value:'女'}
+               ]
+               ">
+        </div>
+        <div class="left">
+            <input name="s_dept" class="easyui-combobox"
+                   data-options="
+               labelPosition:'top'
+               ,label:'所属部门'
+               ,editable:false
+               ,required:'true'
+               ,valueField:'key'
+               ,textField:'value'
+               ,url:'../../json/sys/student_base/student_dept.json'
+               ">
+            <div class="middle"></div>
+            <input name="s_phone" class="easyui-numberbox" data-options="
+            labelPosition:'top',
+            label:'联系电话',
+            required:'true'
+        ">
+        </div>
+        <div class="left">
+            <input name="s_email" class="easyui-textbox" data-options="
+            label:'邮箱',
+            labelPosition:'top',
+            required:'true',
+            validType:'email',
+        ">
+            <div class="middle"></div>
+            <input name="s_idy" class="easyui-numberbox" data-options="
+            label:'身份证号',
+            labelPosition:'top',
+            required:'true'
+        ">
+        </div>
+        <div class="left">
+            <input name="s_address" class="easyui-textbox" data-options="
+            label:'地址',
+            labelPosition:'top',
+            required:'true'
+        ">
+            <div class="middle"></div>
+            <input name="s_job" class="easyui-textbox" data-options="
+            label:'工作',
+            labelPosition:'top',
+            required:'true'
+        ">
+        </div>
+        <div class="left">
+            <input name="s_remark" class="easyui-textbox" data-options="
+            label:'备注',
+            labelPosition:'top',
+            required:'false'
+        ">
+            <!--
+                    <input name="s_name" data-options="label:'姓名'" class="easyui-validatebox" required="true">
+                    <input name="phone" class="easyui-validatebox" required="true">
+            -->
+        </div>
+        <div class="cls"></div>
+        <div class="left" style="padding:5px 0;text-align:right;padding-right:30px">
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="savel(this)">保存</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" plain="true"
+               onclick="cancel1(this)">取消</a>
+        </div>
+    </div>
+    <script type="application/javascript">
+        /*保持按钮*/
+        function savel(target) {
+            var tr = $(target).closest('.datagrid-row-detail').closest('tr').prev();
+            var index = parseInt(tr.attr('datagrid-row-index'));
+            saveItem(index);
+        }
+        /*取消按钮*/
+        function cancel1(target) {
+            var tr = $(target).closest('.datagrid-row-detail').closest('tr').prev();
+            var index = parseInt(tr.attr('datagrid-row-index'));
+            cancelItem(index);
+        }
+    </script>
+</form>
+</body>
+</html>
+

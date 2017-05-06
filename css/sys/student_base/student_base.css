@@ -1,0 +1,39 @@
+.icon-secure{
+    background: url(../../../icons/shield.png) no-repeat center center;
+}
+.icon-xls{
+    background: url(../../../icons/xls.png) no-repeat center center;
+}
+.icon-student{
+    background: url(../../../icons/student.png) no-repeat center center;
+}
+.left {
+    float: left;
+    margin-right: 20px;
+}
+
+.right {
+    float: right;
+}
+.cls{
+    clear: both;
+}
+.middle{
+    margin:10px 0px;
+}
+.box{
+    padding:5px;
+}
+
+form {
+    margin: 0;
+    padding: 0;
+}
+
+.dv-table td {
+    border: 0;
+}
+
+.dv-table input {
+    border: 1px solid #ccc;
+}

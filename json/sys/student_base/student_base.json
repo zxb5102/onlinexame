@@ -1,0 +1,32 @@
+{"total":20,"rows":[
+  {"s_id":"1","s_name":"小明","s_sex":"男","s_dept":"页面设计部门"
+  ,"s_phone":"10086","s_email":"xxxx@xxxx.com","s_idy":"123456789"
+  ,"s_address":"深圳","s_job":"工人","s_remark":"单身"},
+  {"s_id":"2","s_name":"小明","s_sex":"男","s_dept":"页面设计部门"
+  ,"s_phone":"10086","s_email":"xxxx@xxxx.com","s_idy":"123456789"
+  ,"s_address":"深圳","s_job":"工人","s_remark":"单身"},
+  {"s_id":"3","s_name":"小明","s_sex":"男","s_dept":"页面设计部门"
+  ,"s_phone":"10086","s_email":"xxxx@xxxx.com","s_idy":"123456789"
+  ,"s_address":"深圳","s_job":"工人","s_remark":"单身"},
+  {"s_id":"4","s_name":"小明","s_sex":"男","s_dept":"页面设计部门"
+  ,"s_phone":"10086","s_email":"xxxx@xxxx.com","s_idy":"123456789"
+  ,"s_address":"深圳","s_job":"工人","s_remark":"单身"},
+  {"s_id":"5","s_name":"小明","s_sex":"男","s_dept":"页面设计部门"
+  ,"s_phone":"10086","s_email":"xxxx@xxxx.com","s_idy":"123456789"
+  ,"s_address":"深圳","s_job":"工人","s_remark":"单身"},
+  {"s_id":"6","s_name":"小明","s_sex":"男","s_dept":"页面设计部门"
+  ,"s_phone":"10086","s_email":"xxxx@xxxx.com","s_idy":"123456789"
+  ,"s_address":"深圳","s_job":"工人","s_remark":"单身"},
+  {"s_id":"7","s_name":"小明","s_sex":"男","s_dept":"页面设计部门"
+  ,"s_phone":"10086","s_email":"xxxx@xxxx.com","s_idy":"123456789"
+  ,"s_address":"深圳","s_job":"工人","s_remark":"单身"},
+  {"s_id":"8","s_name":"小明","s_sex":"男","s_dept":"页面设计部门"
+  ,"s_phone":"10086","s_email":"xxxx@xxxx.com","s_idy":"123456789"
+  ,"s_address":"深圳","s_job":"工人","s_remark":"单身"},
+  {"s_id":"9","s_name":"小明","s_sex":"男","s_dept":"页面设计部门"
+  ,"s_phone":"10086","s_email":"xxxx@xxxx.com","s_idy":"123456789"
+  ,"s_address":"深圳","s_job":"工人","s_remark":"单身"},
+  {"s_id":"10","s_name":"小明","s_sex":"男","s_dept":"页面设计部门"
+  ,"s_phone":"10086","s_email":"xxxx@xxxx.com","s_idy":"123456789"
+  ,"s_address":"深圳","s_job":"工人","s_remark":"单身"}
+]}
