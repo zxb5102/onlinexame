@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../../easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../../easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../../css/sys/score_student/student_select.css">
+</head>
+<body>
+    <div id="dg"></div>
+    <div id="tb">
+        <div class="box">
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-checked" plain="true"
+               onclick="selectStudent()">选择</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="search_dg()">搜索</a>
+        </div>
+        <!--提供考生的搜索功能-->
+        <!--部门的提供和考生基本信息管理里的部门提供一样-->
+        <div class="box">
+            <form id="fm">
+                <div class="left">
+                    <div><input name="s_name" class="easyui-textbox" data-options="label:'姓名'" style="width:200px"></div>
+                    <div class="middle"></div>
+                    <div><input name="s_sex" class="easyui-combobox"
+                                data-options="
+                    label:'性别',
+                    valueField:'key',
+                    textField:'value',
+                    editable:false,
+                    data:[
+                        {'key':'man','value':'男'},
+                        {'key':'woman','value':'女'}
+                    ]
+                    " style="width:200px"></div>
+                </div>
+                <div class="left">
+                    <div><input name="s_dept" class="easyui-combobox"
+                                data-options="
+                    method:'get',
+                    label:'所属部门',
+                    valueField:'key',
+                    textField:'value',
+                    editable:false,
+                    url:'../../json/sys/student_base/student_dept.json',
+                    method:'get'
+            " style="width:200px"></div>
+                    <div class="middle"></div>
+                    <div><input name="s_phone" class="easyui-numberbox" data-options="label:'联系电话'" style="width:200px"></div>
+                </div>
+                <div class="left">
+                    <div><input name="s_email" class="easyui-textbox" data-options="label:'邮箱',validType:'email'" style="width:200px"></div>
+                    <div class="middle"></div>
+                    <div><input name="s_idy" class="easyui-numberbox" data-options="label:'身份证号'" style="width:200px"></div>
+                </div>
+                <div class="left">
+                    <div><input name="s_address" class="easyui-textbox" data-options="label:'地址'" style="width:200px"></div>
+                    <div class="middle"></div>
+                    <div><input name="s_job" class="easyui-textbox" data-options="label:'工作'" style="width:200px"></div>
+                </div>
+                <div class="left">
+                    <input name="s_remark" class="easyui-textbox" data-options="label:'备注'" style="width:200px">
+                </div>
+            </form>
+            <div class="cls"></div>
+        </div>
+    </div>
+    <div style="display: none;">
+        <form id="form-hide" method="get" action="../score_student/score_student.html">
+            <input name="s_id">
+        </form>
+    </div>
+</body>
+<script type="text/javascript" src="../../easyui/jquery.min.js"></script>
+<script type="text/javascript" src="../../easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../../js/sys/score_student/student_select.js"></script>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../../easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../../easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../../css/sys/score_paper/score_paper.css">
+</head>
+<body>
+<div style="">
+    <div style="padding-left: 30%">
+        <div class="msg-box">
+            <span class="msg-head">当前试题：</span>
+            <span class="base-msg">默认测试试题</span>
+        </div>
+        <div class="msg-box">
+            <span class="msg-head">可考部门：</span>
+            <span class="base-msg">部门1</span>
+            <span class="base-msg">部门2</span>
+            <span class="base-msg">部门3</span>
+        </div>
+        <div class="msg-box">
+            <span class="msg-head">考试时间：</span>
+            <span class="base-msg">2017/03/05 16:30:35</span>
+            <span class="base-msg">2017/03/05 16:30:35</span>
+        </div>
+    </div>
+</div>
+<div id="dg"></div>
+<div id="tb">
+    <!--提供 删除   批改 PDF下载-->
+    <div class="box">
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+           onclick="deleteData()">删除</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-pen" plain="true"
+           onclick="">批改</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-pdf" plain="true" onclick="downPDF()">PDF</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-xls" plain="true" onclick="scoreXLS()">导出</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="searchData()">搜索</a>
+    </div>
+    <div style="clear: both;"></div>
+    <!--提供搜索-->
+    <!--考生部门引用 考生基本信息管理的json文件 -->
+    <div class="box">
+        <form id="fm">
+            <div class="box">
+                <div class="pd">
+                    <input name="student_name" class="easyui-textbox" data-options="label:'考生名'" style="width:200px">
+                </div>
+                <div class="pd">
+                    <input name="student_dept" class="easyui-combobox"  style="width:200px"
+                           data-options="
+                   editable:false,
+                   label:'考生部门',
+                   valueField:'key',
+                   textField:'value',
+                   url:'../../json/sys/student_base/student_dept.json'
+                   ">
+                </div>
+            </div>
+            <div class="box">
+                <div class="pd"><input name="submit_begin" class="easyui-datetimebox" data-options="label:'交卷起始时间'" style="width:250px"></div>
+                <div class="pd"><input name="submit_end" class="easyui-datetimebox" data-options="label:'交卷结束时间'" style="width:250px"></div>
+            </div>
+            <div class="box">
+                <div class="pd"><input name="score_begin" class="easyui-numberspinner" data-options="label:'起始分数'" style="width:200px"></div>
+                <div class="pd"><input name="score_end" class="easyui-numberspinner" data-options="label:'结束分数'" style="width:200px"></div>
+            </div>
+            <div class="box">
+                <div class="pd">
+                    <input name="isPass" class="easyui-combobox" style="width:200px"
+                           data-options="
+                   editable:false,
+                   label:'及格',
+                   valueField:'key',
+                   textField:'value',
+                   data:[
+                   {key:'pass',value:'及格'},
+                   {key:'noPass',value:'不及格'}
+                   ]
+                   ">
+                </div>
+                <div class="pd">
+                    <input name="isView" class="easyui-combobox" style="width:200px"
+                           data-options="
+                   editable:false,
+                   label:'是否批改',
+                   valueField:'key',
+                   textField:'value',
+                   data:[
+                   {key:'all',value:'无'},
+                   {key:'viewed',value:'是'},
+                   {key:'noView',value:'否'}
+                   ]
+                   ">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="dg-absence"></div>
+<div id="tb-absence">
+    <form id="fm-absence">
+        <div class="box">
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-xls" plain="true" onclick="absenceXLS()">导出</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="searchData2()">搜索</a>
+        </div>
+        <div style="clear: both;"></div>
+        <div class="box">
+            <input name="student_name" class="easyui-textbox" data-options="label:'考生名'" style="width:200px">
+            <input name="student_dept" class="easyui-combobox" style="width:200px"
+                   data-options="
+                   editable:false,
+                   label:'考生部门',
+                   valueField:'key',
+                   textField:'value',
+                   url:'../../json/sys/student_base/student_dept.json'
+               ">
+        </div>
+    </form>
+</div>
+</body>
+<script type="text/javascript" src="../../easyui/jquery.min.js"></script>
+<script type="text/javascript" src="../../easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../../js/sys/score_paper/score_paeper.js"></script>
+</html>

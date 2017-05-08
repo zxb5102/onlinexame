@@ -1,0 +1,30 @@
+.icon-paper{
+    background: url(../../../icons/contract.png) no-repeat center center;
+}
+.icon-pdf{
+    background: url(../../../icons/pdf.png) no-repeat center center;
+}
+.icon-pen{
+    background: url(../../../icons/pen.png) no-repeat center center;
+}
+.base-msg{
+    color:#FF0000;
+}
+.icon-xls{
+    background: url(../../../icons/xls.png) no-repeat center center;
+}
+
+.box{
+    display: inline-block;
+    margin-right: 10px;
+}
+.pd{
+    padding: 5px;
+}
+.base-msg{
+    color:#FF0000;
+    margin-right: 20px;
+}
+.msg-head{
+    margin-right: 10px;
+}

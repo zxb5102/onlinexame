@@ -1,0 +1,26 @@
+.left {
+    float: left;
+    margin-right: 20px;
+}
+.icon-student{
+    background: url(../../../icons/student.png) no-repeat center center;
+}
+.icon-checked{
+    background: url(../../../icons/checked.png) no-repeat center center;
+}
+.right {
+    float: right;
+}
+.cls{
+    clear: both;
+}
+.middle{
+    margin:10px 0px;
+}
+.box{
+    padding:5px;
+}
+form {
+    margin: 0;
+    padding: 0;
+}

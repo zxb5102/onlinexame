@@ -59,10 +59,12 @@ function myfilter() {
     $('#dg').datagrid(
         'enableFilter', [{
             field: 'end_date',
-            type: 'datebox'
+            /*editable:false,*/
+            type: 'datetimebox'
         }, {
             field: 'begin_date',
-            type: 'datebox'
+            /*editable:false,*/
+            type: 'datetimebox'
         }, {
             field: 'over_time', type: 'numberbox'
         }, {
@@ -187,7 +189,7 @@ function validate(field, value) {
                 flag = true;
             }
         } else if ((index = ary2.indexOf(title)) != -1) {
-            if (/[^0-9/]/.test(value)) {
+            if (/[^0-9/:\s]/.test(value)) {
                 flag = true;
             }
         } else if ((index = ary3.indexOf(title)) != -1) {

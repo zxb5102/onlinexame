@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../../easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../../easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../../css/sys/score_student/score_student.css">
+</head>
+<body>
+<div style="height: 50px;">
+    <div style="width: 350px;margin: auto;line-height: 50px">
+        <span class="msg-head">当前考生：</span><span class="base-msg">你妹的大爷</span>
+        <span class="msg-head">部门：</span><span class="base-msg">默认部门</span>
+    </div>
+</div>
+<div id="dg"></div>
+<div id="tb">
+    <!--提供 删除   批改 PDF下载-->
+    <div class="box">
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+           onclick="deleteData()">删除</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-pen" plain="true"
+           onclick="">批改</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-pdf" plain="true" onclick="downPDF()">PDF</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="searchData()">搜索</a>
+    </div>
+    <!--提供搜索-->
+    <!--分类URL引用已经存在的试题管理模块的json-->
+    <div calss="box">
+        <form id="fm">
+            <div class="left">
+                <input name="paper_name" class="easyui-textbox" data-options="label:'试卷名'" style="width:200px">
+            </div>
+            <div class="left">
+                <input name="paper_category" class="easyui-combobox"  style="width:200px"
+                       data-options="
+                   editable:false,
+                   label:'试卷分类',
+                   valueField:'key',
+                   textField:'value',
+                   url:'../../json/sys/exist_paper/paper_category.json'
+                   ">
+            </div>
+            <div class="left">
+                <input name="idPass" class="easyui-combobox" style="width:200px"
+                       data-options="
+                   editable:false,
+                   label:'及格',
+                   valueField:'key',
+                   textField:'value',
+                   data:[
+                   {key:'pass',value:'及格'},
+                   {key:'noPass',value:'不及格'}
+                   ]
+                   ">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../easyui/jquery.min.js"></script>
+<script type="text/javascript" src="../../easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../../js/sys/score_student/score_student.js"></script>
+</html>

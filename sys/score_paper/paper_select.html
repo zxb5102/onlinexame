@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../../easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../../easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../../css/sys/score_paper/paper_select.css">
+</head>
+<body>
+<div id="dg"></div>
+<div id="tb">
+    <div class="box">
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-checked" plain="true"
+           onclick="selectPaper()">选择</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="search_dg()">搜索</a>
+    </div>
+    <div class="box">
+        <form id="fm">
+            <div class="left">
+                <input name="paper_name" class="easyui-textbox" data-options="label:'试题名'" style="width:200px">
+            </div>
+            <!--试题的分类使用 已经存在的试题 模块的json数据-->
+            <div class="left">
+                <input name="paper_category" class="easyui-combobox"
+                            data-options="
+                    method:'get',
+                    label:'试题分类',
+                    valueField:'key',
+                    textField:'value',
+                    editable:false,
+                    url:'../../json/sys/exist_paper/paper_category.json',
+                    method:'get'
+            " style="width:200px">
+            </div>
+            <div class="left">
+                <input name="start_time" class="easyui-datetimebox" data-options="label:'开始时间',editable:false" style="width:300px">
+            </div>
+            <div class="left">
+                <input name="end_time" class="easyui-datetimebox" data-options="label:'结束时间',editable:false" style="width:300px">
+            </div>
+        </form>
+        <div class="cls"></div>
+    </div>
+</div>
+<div style="display: none;">
+    <form id="form-hide" method="get" action="score_paper.html">
+        <input name="paper_id">
+    </form>
+</div>
+</body>
+<script type="text/javascript" src="../../easyui/jquery.min.js"></script>
+<script type="text/javascript" src="../../easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../../js/sys/score_paper/paper_select.js"></script>
+</html>

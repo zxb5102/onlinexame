@@ -1,0 +1,23 @@
+.box{
+    padding: 5px;
+
+}
+.left{
+    padding: 5px;;
+    display: inline-block;
+    margin-right: 70px;
+}
+.icon-paper{
+    background: url(../../../icons/contract.png) no-repeat center center;
+}
+.icon-pdf{
+    background: url(../../../icons/pdf.png) no-repeat center center;
+}
+.icon-pen{
+    background: url(../../../icons/pen.png) no-repeat center center;
+}
+.base-msg{
+    color:#FF0000;
+}
+.msg-head{
+}

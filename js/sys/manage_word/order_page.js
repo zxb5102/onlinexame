@@ -6,7 +6,7 @@ $.fn.datebox.defaults.formatter = function(date){
     var m = date.getMonth()+1;
     var d = date.getDate();
     return y+'/'+m+'/'+d;
-}
+};
 $.fn.datebox.defaults.parser = function(s){
     var t = Date.parse(s);
     if (!isNaN(t)){
@@ -14,7 +14,7 @@ $.fn.datebox.defaults.parser = function(s){
     } else {
         return new Date();
     }
-}
+};
 $(function(){
     /*更该时间的默认格式*/
 

@@ -169,11 +169,15 @@ $(function () {
     $('#change_pwd').switchbutton({onChange:function () {
         toggle(this);
         if($(this).attr('flag') == 'true'){
-            $('#pwd').show(200);
+            $('#dlg').dialog('resize',{height:'220px'});
+            $('#pwd').slideDown(200);
 //            var pwd = $('#pwd1').val();
             msg_secure.change_pwd = true;
         }else{
-            $('#pwd').hide(200);
+            $('#pwd').slideUp(200);
+            setTimeout(function () {
+                $('#dlg').dialog('resize',{height:'170px'});
+            },200);
             msg_secure.change_pwd = false;
         }
     }});
