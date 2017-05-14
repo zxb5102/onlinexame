@@ -19,12 +19,13 @@ $.fn.datebox.defaults.parser = function(s){
 $(function () {
     $('#dg').datagrid({
         loadMsg: '玩命加载中 ~_~ ',
-        url: '../../json/sys/score_paper/paper_select.json',
+        url: '../../../json/sys/score_paper/paper_select.json',
         method: 'get',
         title: '选择试题',
         iconCls: 'icon-result',
         fitColumns: true,
         width: '100%',
+        noheader:true,
         /*onLoadSuccess:function () {
          window.editIndex = undefined;
          },*/
@@ -45,7 +46,7 @@ $(function () {
          ddv.panel({
          border:false,
          cache:false,
-         href:'../../sys/student_base/student_base2.html?index='+index,
+         href:'../../../sys/student_base/student_base2.html?index='+index,
          onLoad:function(){
          $('#dg').datagrid('fixDetailRowHeight',index);
          $('#dg').datagrid('selectRow',index);

@@ -1,16 +1,18 @@
 /**
- * Created by Administrator on 2017/5/7.
+ * Created by Administrator on 2017/5/8.
  */
 var search_msg = new Object();
+var search_msg_absence = new Object();
 $(function () {
     $('#dg').datagrid({
         loadMsg: '玩命加载中 ~_~ ',
-        url: '../../json/sys/score_student/score_student.json',
+        url: '../../../json/sys/score_paper/score_paper.json',
         method: 'get',
         title: '学生成绩查询',
         iconCls: 'icon-paper',
         fitColumns: true,
-        width: '100%',
+        collapsible:true,
+        width: '95%',
         /*onLoadSuccess:function () {
          window.editIndex = undefined;
          },*/
@@ -37,7 +39,7 @@ $(function () {
          ddv.panel({
          border:false,
          cache:false,
-         href:'../../sys/student_base/student_base2.html?index='+index,
+         href:'../../../sys/student_base/student_base2.html?index='+index,
          onLoad:function(){
          $('#dg').datagrid('fixDetailRowHeight',index);
          $('#dg').datagrid('selectRow',index);
@@ -49,8 +51,8 @@ $(function () {
         columns: [[
             {field:'ck',title:'勾选',checkbox:'true'},
             {field:'id',title:'学生考试标识',hidden:'true'},
-            {field: 'paper_name', title: '试卷名', width: 15},
-            {field: 'category', title: '分类', width: 15},
+            {field: 'student_name', title: '考生名', width: 15},
+            {field: 'student_dept', title: '所属部门', width: 15},
             {field: 'score', title: '分数', width: 10},
             {field: 'isPass', title: '及格', width: 10},
             {field: 'submit_time', title: '交卷时间', width: 15}
@@ -64,10 +66,65 @@ $(function () {
             // console.log(search_msg);
         }
     });
+    $('#dg-absence').datagrid({
+        loadMsg: '玩命加载中 ~_~ ',
+        url: '../../../json/sys/score_paper/absence_student.json',
+        method: 'get',
+        collapsed:true,
+        title: '缺考学生信息',
+        iconCls: 'icon-paper',
+        fitColumns: true,
+        collapsible:true,
+        width: '95%',
+        /*onLoadSuccess:function () {
+         window.editIndex = undefined;
+         },*/
+        singleSelect: true,
+        pagination: true,
+        idField:'id',
+        toolbar: '#tb-absence',
+        /*onDblClickRow: onDblClick,*/
+        rownumbers:'true',
+        /*view: detailview,*/
+        /*detailFormatter:function(index,row){
+         return '<div class="ddv"></div>';
+         },
+         onExpandRow: function(index,row){
+         var ddv = $(this).datagrid('getRowDetail',index).find('div.ddv');
+         ddv.panel({
+         border:false,
+         cache:false,
+         href:'../../../sys/student_base/student_base2.html?index='+index,
+         onLoad:function(){
+         $('#dg').datagrid('fixDetailRowHeight',index);
+         $('#dg').datagrid('selectRow',index);
+         $('#dg').datagrid('getRowDetail',index).find('form').form('load',row);
+         }
+         });
+         $('#dg').datagrid('fixDetailRowHeight',index);
+         },*/
+        columns: [[
+            {field:'id',title:'学生标识',hidden:'true'},
+            {field: 'student_name', title: '考生名', width: 15},
+            {field: 'student_dept', title: '所属部门', width: 15}
+        ]]
+    });
+    $('#fm-absence').form({
+        onChange:function (tar) {
+            var name = $($(tar).context).attr('textboxname');
+            var value = $(tar).eq(0).textbox('getValue');
+            search_msg_absence[name] = value;
+            // console.log(search_msg);
+        }
+    });
 });
 /*搜索框*/
 function searchData() {
     $('#dg').datagrid('load',search_msg);
+    console.log(search_msg);
+}
+function searchData2() {
+    $('#dg-absence').datagrid('load',search_msg_absence);
     console.log(search_msg);
 }
 /*删除数据*/
@@ -79,7 +136,7 @@ function deleteData() {
                 var id = row.id;
                 $.ajax({
                     method:'get',
-                    url:'../../json/sys/score_student/delete_data.json',
+                    url:'../../../json/sys/score_paper/delete_data.json',
                     dataType:'json',
                     data:{id:id},
                     success:function (data) {
@@ -106,7 +163,7 @@ function downPDF() {
             ids += tar.id + ',';
         });
         $.ajax({
-            url:'../../json/sys/score_student/downPDF.json',
+            url:'../../../json/sys/score_paper/downPDF.json',
             method:'get',
             dataType:'json',
             data:{ids:ids},
@@ -123,4 +180,42 @@ function downPDF() {
             }
         });
     }
+}
+
+/*导出*/
+function scoreXLS() {
+    $.ajax({
+        url:"../../../json/sys/score_paper/scoreXLs.json",
+        dataType:"json",
+        method:"get",
+        success:function (data) {
+            if( data.flag == 'true'){
+                var new_url = window.location.origin + "/" + window.location.pathname.split('/')[1] + data.url ;
+                window.location.href = new_url;
+            }else{
+                alert('导出成绩表失败,请联系管理员');
+            }
+        },
+        error:function () {
+            alert('导出成绩表失败,请联系管理员');
+        }
+    });
+}
+function absenceXLS() {
+    $.ajax({
+        url:"../../../json/sys/score_paper/absenceXLs.json",
+        dataType:"json",
+        method:"get",
+        success:function (data) {
+            if( data.flag == 'true'){
+                var new_url = window.location.origin + "/" + window.location.pathname.split('/')[1] + data.url ;
+                window.location.href = new_url;
+            }else{
+                alert('导出缺考统计表失败,请联系管理员');
+            }
+        },
+        error:function () {
+            alert('导出缺考统计表失败,请联系管理员');
+        }
+    });
 }

@@ -1,0 +1,24 @@
+.badge{
+    display: inline-block;
+    min-width: 10px;
+    line-height: 1;
+    font-size: 12px;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: 10px;
+    padding: 2px 4px;
+    border-style: solid;
+    border-width: 0px;
+    color: #fff;
+    z-index: 99999;
+    margin-left: 15px;
+}
+.gray{
+    background-color: #747474;
+}
+.red{
+    background-color: #d9534f;
+}
+.green{
+    background-color: #4cae4c;
+}
