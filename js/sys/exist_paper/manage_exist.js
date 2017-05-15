@@ -19,9 +19,13 @@ $(function () {
         pagination: true,
         remoteFilter: true,
         toolbar: '#tb',
+        rownumbers:true,
+        checkOnSelect:false,
+        selectOnCheck:false,
         onDblClickRow: onDblClick,
         columns: [[
-            {field: 'paper_id', title: 'ID', width: 10},
+            {field:'ck',title:'勾选',checkbox:'true'},
+            {field: 'paper_id', title: 'ID', width: 10,hidden:true},
             {field: 'paper_name', title: '名称', width: 20, editor: {type: 'textbox'}},
             {field: 'begin_date', title: '开始时间', width: 20, editor: {type: 'datebox'}},
             {field: 'end_date', title: '结束时间', width: 20, editor: {type: 'datebox'}},
@@ -54,6 +58,74 @@ $(function () {
     /*初始化过滤器*/
     myfilter();
 });
+
+$(function () {
+    /*绑定按钮的监听事件*/
+    $('#mm').menu({
+        onClick:function(item){
+
+            var rows =  $("#dg").datagrid('getChecked');
+            if(rows.length > 0 ){
+                if( item.id == 'all_dept'){
+                    /*批量更改可考部门*/
+                    $('#bat_category').combobox('disable');
+                    $('#bat_dept').combobox('enable');
+                }else{
+                    /*批量更改试题分类*/
+                    $('#bat_category').combobox('enable');
+                    $('#bat_dept').combobox('disable');
+                }
+                $("#dd").dialog("open");
+            }else{
+                $.messager.alert('温馨提示','请勾选要更改的条目！','info');
+            }
+
+        }
+    });
+    /*初始化批量更改按钮*/
+    $('#mb').menubutton({
+        menu:'#mm',
+        iconCls:'icon-edit'
+    });
+    $('#ff').form({
+        url:'../../json/sys/exist_paper/bat.json',
+        onSubmit: function(param){
+            param.id = getCheckedData();
+            var isValid = $(this).form('validate');
+            return isValid;
+        },
+        success:function(data){
+            var da = JSON.parse(data);
+            if( da.flag == 'true' ){
+                batCancel();
+                $('#dg').datagrid('reload');
+            }else{
+                alert('更改失败，请联系管理员！');
+            }
+        }
+    });
+});
+
+
+/*提交 批量更改的数据*/
+function batConfirm() {
+    $('#ff').submit();
+}
+/*关闭对话框*/
+function batCancel() {
+    $("#dd").dialog("close");
+    $('#bat_category').combobox('clear');
+    $('#bat_dept').combobox('clear');
+}
+/*获取选中的数据*/
+function getCheckedData() {
+    var ary = "";
+    var rows =  $("#dg").datagrid('getChecked');
+    $(rows).each(function (index, tar) {
+        ary += $(tar)[0].paper_id + ',';
+    });
+    return ary;
+}
 /*初始化过滤器，过滤器的源码经过修改，只是应用过滤器的样式*/
 function myfilter() {
     $('#dg').datagrid(

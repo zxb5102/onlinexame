@@ -54,14 +54,80 @@ $(function () {
         ]]
     });
 });
-/*下载pdf*/
-function getPdf() {
+$(function () {
+    /*绑定按钮的监听事件*/
+    $('#mm').menu({
+        onClick:function(item){
+            var rows =  $("#dg").datagrid('getChecked');
+            if(rows.length > 0 ){
+                if( item.id == 'all_dept'){
+                    /*批量更改部门*/
+                    $('#bat_pwd').passwordbox('disable');
+                    $('#bat_dept').combobox('enable');
+                }else{
+                    /*批量更改密码*/
+                    $('#bat_pwd').passwordbox('enable');
+                    $('#bat_dept').combobox('disable');
+                }
+                $("#dd").dialog("open");
+            }else{
+                $.messager.alert('温馨提示','请勾选要更改的条目！','info');
+            }
+        }
+    });
+    /*初始化批量更改按钮*/
+    $('#mb').menubutton({
+        menu:'#mm',
+        iconCls:'icon-edit'
+    });
+    $('#ff').form({
+        url:'../../json/sys/student_base/bat.json',
+        onSubmit: function(param){
+            param.id = getCheckedData();
+            var isValid = $(this).form('validate');
+            return isValid;
+        },
+        success:function(data){
+            var da = JSON.parse(data);
+            if( da.flag == 'true' ){
+                batCancel();
+                $('#dg').datagrid('reload');
+            }else{
+                alert('更改失败，请联系管理员！');
+            }
+        }
+    });
+});
+
+
+/*提交 批量更改的数据*/
+function batConfirm() {
+    $('#ff').submit();
+}
+/*关闭对话框*/
+function batCancel() {
+    $("#dd").dialog("close");
+    $('#bat_pwd').passwordbox('clear');
+    $('#bat_dept').combobox('clear');
+}
+/*获取选中的数据*/
+function getCheckedData() {
     var ary = "";
     var rows =  $("#dg").datagrid('getChecked');
     $(rows).each(function (index, tar) {
         ary += $(tar)[0].s_id + ',';
     });
-    console.log(ary);
+    return ary;
+}
+/*下载pdf*/
+function getPdf() {
+    // var ary = "";
+    // var rows =  $("#dg").datagrid('getChecked');
+    // $(rows).each(function (index, tar) {
+    //     ary += $(tar)[0].s_id + ',';
+    // });
+    // console.log(ary);
+    var ary = getCheckedData();
     if( ary != ""){
         $.ajax({
             url:'../../json/sys/student_base/down_excel.json',

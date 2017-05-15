@@ -9,6 +9,51 @@
 <body>
 <!--数据表格-->
 <table id="dg"></table>
+<div id="mm" style="width:120px;">
+    <div id="all_pwd" data-options="iconCls:'icon-bat-pwd'">更改密码</div>
+    <div id="all_dept" data-options="iconCls:'icon-bat-category'">更改部门</div>
+</div>
+
+<div id="dd" class="easyui-dialog" title="批量操作" style="width:400px;height:200px;display: none"
+     data-options="iconCls:'icon-save',closed:true">
+    <form id="ff" method="post">
+        <div style="padding:10px 60px 20px 60px">
+            <div>
+                <!--<label for="bat_pwd"></label>-->
+                <input label="密码:" id="bat_pwd" name="bat_pwd" class="easyui-passwordbox"
+                       data-options="
+                   prompt:'Password',
+                   iconWidth:28,
+                   required:true,
+                   width:250,
+                   labelPosition:'top',
+                   disabled:false
+                   " >
+            </div>
+            <div>
+                <input label="部门:" id="bat_dept" name="bat_dept" class="easyui-combobox"
+                       data-options="
+                   required:true,
+                   width:250,
+                   labelPosition:'top',
+                   valueField:'key',
+                   textField:'value',
+                   editable:false,
+                   url:'../../json/sys/student_base/student_dept.json',
+                   disabled:true
+                   " />
+            </div>
+            <div style="text-align:center;padding:5px;margin-top: 5px">
+                <a href="javascript:void(0)" class="easyui-linkbutton" onclick="batConfirm()">确定</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" onclick="batCancel()">取消</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+
 <div id="tb">
     <!--负责 新建 编辑 删除 操作的功能提供-->
     <div class="box">
@@ -19,6 +64,7 @@
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-secure" plain="true" onclick="openDlg()">安全设置</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-xls" plain="true" onclick="getPdf()">导出</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="search_dg()">搜索</a>
+        <a href="javascript:void(0)" id="mb">批量操作</a>
     </div>
     <!--负责搜索功能的提供-->
     <div class="box">

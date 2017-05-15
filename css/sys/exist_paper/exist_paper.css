@@ -1,3 +1,9 @@
 .icon-view {
     background: url('../../../icons/view.png') no-repeat center center;
 }
+.icon-bat-category{
+    background: url('../../../icons/police-cap.png') no-repeat center center;
+}
+.icon-bat-enable{
+    background: url('../../../icons/idea.png') no-repeat center center;
+}

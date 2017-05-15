@@ -7,6 +7,12 @@
 .icon-student{
     background: url(../../../icons/student.png) no-repeat center center;
 }
+.icon-bat-pwd{
+    background: url(../../../icons/key-tool.png) no-repeat center center;
+}
+.icon-bat-category{
+    background: url(../../../icons/police-cap.png) no-repeat center center;
+}
 .left {
     float: left;
     margin-right: 20px;
